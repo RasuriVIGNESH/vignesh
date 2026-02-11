@@ -425,8 +425,32 @@ header.sticky {
     transform: scale(1.1);
 }
 
+
 .row:hover .layer {
     height: 100%;
+    cursor: pointer;
+}
+
+.layer h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.layer i {
+    color: var(--text-color);
+    margin-top: 10px;
+    font-size: 24px;
+    background: var(--main-color);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
 
 /* github section -------------- */
@@ -807,4 +831,183 @@ form textarea {
         height: 180px;
     }
 
+}
+
+/* --- Project Modal Styles --- */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Black w/ opacity */
+    backdrop-filter: blur(5px);
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background-color: #1e1e1e;
+    margin: 5% auto;
+    /* 5% from top and centered */
+    padding: 30px;
+    border: 1px solid #333;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    animation: modalSlideIn 0.4s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: var(--main-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.modal-header h2 {
+    color: var(--main-color);
+    font-size: 24px;
+    margin: 0;
+}
+
+.modal-links a {
+    font-size: 28px;
+    color: #fff;
+    /* margin-left: 15px; removed */
+    margin-right: 15px;
+    /* optional spacing if not using gap on container */
+    transition: color 0.3s;
+}
+
+.modal-links a:hover {
+    color: var(--main-color);
+}
+
+.modal-body h3 {
+    color: #fff;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-left: 3px solid var(--main-color);
+    padding-left: 10px;
+}
+
+.modal-body p {
+    color: #ccc;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.modal-image-gallery {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.modal-image-gallery img {
+    height: 300px;
+    object-fit: contain;
+    /* or cover depending on user pref, contain is safer for details */
+    border-radius: 8px;
+    border: 1px solid #333;
+    flex-shrink: 0;
+}
+
+/* Scrollbar for gallery */
+.modal-image-gallery::-webkit-scrollbar {
+    height: 8px;
+}
+
+.modal-image-gallery::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+.modal-image-gallery::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 4px;
+}
+
+.modal-image-gallery::-webkit-scrollbar-thumb:hover {
+    background: var(--main-color);
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 20px;
+    }
+
+    .modal-image-gallery img {
+        height: 200px;
+    }
+}
+
+/* --- Certification Specific Styles --- */
+/* --- Certification Specific Styles --- */
+#certifications .row {
+    cursor: default;
+    border: 2px solid #333;
+    background: #1e1e1e;
+    aspect-ratio: 1.414 / 1;
+    /* Standard A4 landscape ratio */
+    overflow: hidden;
+    /* Hide scrollbars if content slightly overflows */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#certifications .row:hover img,
+#certifications .row:hover embed {
+    transform: none;
+}
+
+#certifications .row img,
+#certifications .row embed {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border: none;
+    display: block;
 }
