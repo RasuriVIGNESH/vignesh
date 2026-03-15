@@ -52,6 +52,17 @@ const projectData = {
         images: [
             "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&auto=format&fit=crop"
         ]
+    },
+    hivemind: {
+        title: "HiveMind - AI Interview Prep",
+        description: "HiveMind is a comprehensive platform designed to assist with technical interview preparation. It leverages Artificial Intelligence to generate personalized interview questions based on candidate profiles and job descriptions, and provides AI-driven evaluation of answers.",
+        techStack: "React, Vite, Tailwind CSS, Java 17, Spring Boot, Spring Security (JWT), H2 Database, Python, FastAPI, Google Generative AI (Gemini), Pandas",
+        github: "#",
+        live: "#",
+        images: [
+            "./project Photos/gate mind/logo.png",
+            "./project Photos/gate mind/screening round.png"
+        ]
     }
 };
 
