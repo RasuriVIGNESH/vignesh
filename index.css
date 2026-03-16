@@ -316,14 +316,12 @@ header.sticky {
 .tech-item i {
     font-size: 36px;
     margin-bottom: 10px;
-    color: #e5e5e5;
     transition: all 0.3s ease;
 }
 
-/* Original colors for devicons can be restored if desired, but sticking to the clean white/monochrome look from the image for now, with hover color pop if needed. */
 .tech-item:hover i {
-    color: #fff;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.5));
 }
 
 .tech-item span {
