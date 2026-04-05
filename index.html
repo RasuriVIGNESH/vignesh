@@ -233,6 +233,35 @@
             color: var(--blue);
         }
 
+        /* Open to Work badge */
+        .otw-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 1rem 0.35rem 0.55rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(52, 211, 153, 0.45);
+            background: rgba(52, 211, 153, 0.08);
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #34d399;
+            letter-spacing: 0.04em;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.5s ease 0.05s forwards;
+        }
+
+        .otw-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #34d399;
+            box-shadow: 0 0 6px #34d399;
+            animation: pulseGlow 1.6s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
         /* scroll-reveal base */
         .reveal {
             opacity: 0;
@@ -692,8 +721,10 @@
         .mac-screen {
             background: rgba(10, 18, 34, 0.6);
             overflow: hidden;
+            position: relative;
         }
 
+        /* Legacy single-image fallback */
         .mac-screen img {
             width: 100%;
             height: auto;
@@ -873,6 +904,139 @@
             width: 100%;
             object-fit: contain;
             border-radius: 0.5rem;
+        }
+
+        /* GitHub 6-Month Contribution Calendar */
+        .gh-calendar-wrap {
+            background: linear-gradient(135deg, rgba(12, 20, 38, 0.95), rgba(22, 35, 58, 0.7));
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 1rem;
+            padding: 1.75rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.35s, box-shadow 0.35s;
+        }
+
+        .gh-calendar-wrap:hover {
+            border-color: rgba(52, 211, 153, 0.35);
+            box-shadow: 0 4px 40px rgba(52, 211, 153, 0.08);
+        }
+
+        .gh-calendar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+        }
+
+        .gh-calendar-header .gh-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: var(--mono);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .gh-calendar-header .gh-title i {
+            font-size: 1.25rem;
+            color: var(--teal);
+        }
+
+        .gh-calendar-header .gh-contrib-count {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        .gh-calendar-header .gh-contrib-count span {
+            color: var(--teal);
+            font-weight: 700;
+        }
+
+        .gh-calendar-svg-wrap {
+            width: 100%;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(148, 163, 184, 0.2) transparent;
+        }
+
+        .gh-calendar-svg-wrap::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .gh-calendar-svg-wrap::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.2);
+            border-radius: 4px;
+        }
+
+        .gh-calendar-svg-wrap svg {
+            display: block;
+            min-width: 100%;
+        }
+
+        .gh-legend {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.35rem;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: var(--muted);
+            font-family: var(--mono);
+        }
+
+        .gh-legend-box {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .gh-tooltip {
+            position: fixed;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
+            color: white;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            padding: 0.4rem 0.7rem;
+            border-radius: 6px;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.18s ease;
+            white-space: nowrap;
+        }
+
+        .gh-tooltip.visible {
+            opacity: 1;
+        }
+
+        .gh-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 140px;
+            color: var(--muted);
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            gap: 0.5rem;
+        }
+
+        .gh-loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* ============================================================
@@ -1068,6 +1232,24 @@
             border-top: 1px solid var(--border);
         }
 
+        .cert-caption {
+            margin-top: 0.65rem;
+            text-align: center;
+        }
+
+        .cert-caption strong {
+            display: block;
+            font-size: 0.82rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .cert-caption span {
+            font-size: 0.72rem;
+            color: var(--muted);
+            font-family: var(--mono);
+        }
+
         .end p {
             color: var(--muted);
             font-size: 0.8rem;
@@ -1090,6 +1272,66 @@
         .top a:hover {
             border-color: var(--blue);
             color: var(--blue);
+        }
+
+        .proj-featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, rgba(96, 165, 250, 0.15), rgba(52, 211, 153, 0.1));
+            border: 1px solid rgba(96, 165, 250, 0.35);
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--sky);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 0.55rem;
+        }
+
+        .contact-socials {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contact-social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1.1rem;
+            border-radius: 9999px;
+            border: 1px solid var(--border);
+            background: rgba(30, 41, 59, 0.5);
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .contact-social-link:hover {
+            border-color: var(--sky);
+            color: var(--sky);
+            background: rgba(56, 189, 248, 0.08);
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--teal);
+            font-family: var(--mono);
+            font-size: 0.9rem;
+        }
+
+        .form-success i {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
         }
 
         /* ============================================================
@@ -1314,11 +1556,152 @@
             color: var(--blue);
         }
 
-        .modal-body img {
+        /* Slider Styles — cover-push animation */
+        .slider-container {
+            position: relative;
             width: 100%;
-            border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
+            overflow: hidden;
+            border-radius: 0.8rem;
+            margin-bottom: 2rem;
             border: 1px solid var(--border);
+            aspect-ratio: 16/9;
+            background: #060c1a;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            user-select: none;
+            z-index: 0;
+            background: #060c1a;
+        }
+
+        .slide.active {
+            z-index: 1;
+        }
+
+        /* Incoming slide slides OVER the still current slide */
+        @keyframes coverFromRight {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes coverFromLeft {
+            from {
+                transform: translateX(-100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .slide.enter-right {
+            z-index: 2;
+            animation: coverFromRight 0.52s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .slide.enter-left {
+            z-index: 2;
+            animation: coverFromLeft 0.52s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .slide img,
+        .slide embed {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            display: block;
+        }
+
+        .slide embed {
+            pointer-events: auto;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background: rgba(12, 20, 38, 0.7);
+            backdrop-filter: blur(8px);
+            color: white;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .slider-nav:hover {
+            background: var(--blue);
+            border-color: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 15px rgba(96, 165, 250, 0.4);
+        }
+
+        .slider-prev {
+            left: 1rem;
+        }
+
+        .slider-next {
+            right: 1rem;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.6rem;
+            z-index: 10;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slider-dot.active {
+            background: var(--sky);
+            width: 24px;
+            border-radius: 4px;
         }
 
         .modal-details h3 {
@@ -1477,11 +1860,11 @@
 
         <div class="hero-content">
             <div class="hero-text">
+                <div class="otw-badge"><span class="otw-dot"></span> Open to Internships &amp; Full-time</div>
                 <h1>Hi, I'm <span class="grad-text">Rasuri Vignesh</span></h1>
                 <p>
-                    <span class="accent-underline">Full-stack developer</span>
-                    who reaches for the stars to build scalable applications
-                    with modern technologies and best practices.
+                    <span class="accent-underline">Full stack developer</span>
+                    building real-time, AI-powered apps with Java &amp; Spring Boot.
                 </p>
             </div>
 
@@ -1555,16 +1938,21 @@
             </div>
             <!-- Row 3 (6) — DevOps & Infrastructure -->
             <div class="tech-row">
-                <div class="tech-item"><i class="devicon-amazonwebservices-plain-wordmark colored"></i><span>AWS</span></div>
+                <div class="tech-item"><i class="devicon-amazonwebservices-plain-wordmark colored"></i><span>AWS</span>
+                </div>
                 <div class="tech-item"><i class="devicon-docker-plain colored"></i><span>Docker</span></div>
-                <div class="tech-item"><i class="devicon-linux-plain" style="color: #f5c211;"></i><span>Linux</span></div>
+                <div class="tech-item"><i class="devicon-linux-plain" style="color: #f5c211;"></i><span>Linux</span>
+                </div>
                 <div class="tech-item"><i class="devicon-git-plain colored"></i><span>Git</span></div>
-                <div class="tech-item"><i class="devicon-github-original" style="color: #e6edf3;"></i><span>GitHub</span></div>
-                <div class="tech-item"><i class="devicon-ssh-original-wordmark" style="color: #7ec8e3;"></i><span>SSH</span></div>
+                <div class="tech-item"><i class="devicon-github-original"
+                        style="color: #e6edf3;"></i><span>GitHub</span></div>
+                <div class="tech-item"><i class="devicon-ssh-original-wordmark"
+                        style="color: #7ec8e3;"></i><span>SSH</span></div>
             </div>
             <!-- Row 4 (5) — APIs & Dev Tools -->
             <div class="tech-row">
-                <div class="tech-item"><i class="bx bx-globe" style="color: #4fc08d;"></i><span>RESTful APIs</span></div>
+                <div class="tech-item"><i class="bx bx-globe" style="color: #4fc08d;"></i><span>RESTful APIs</span>
+                </div>
                 <div class="tech-item"><i class="devicon-swagger-plain colored"></i><span>Swagger</span></div>
                 <div class="tech-item"><i class="bx bx-data" style="color: #59666c;"></i><span>JPA</span></div>
                 <div class="tech-item"><i class="devicon-postman-plain colored"></i><span>Postman</span></div>
@@ -1575,12 +1963,19 @@
                 <div class="tech-item"><i class="devicon-vscode-plain colored"></i><span>VS Code</span></div>
                 <div class="tech-item"><i class="devicon-jupyter-plain colored"></i><span>Jupyter</span></div>
                 <div class="tech-item"><i class="devicon-figma-plain colored"></i><span>Figma</span></div>
-                <div class="tech-item"><i class="devicon-notion-plain" style="color: #e6e6e6;"></i><span>Notion</span></div>
+                <div class="tech-item"><i class="devicon-notion-plain" style="color: #e6e6e6;"></i><span>Notion</span>
+                </div>
             </div>
             <!-- Row 6 (2) — Creative & Office -->
             <div class="tech-row">
                 <div class="tech-item"><i class="devicon-photoshop-plain colored"></i><span>Photoshop</span></div>
-                <div class="tech-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1.7em" height="1.7em" fill="none"><path d="M4 4h8v8H4z" fill="#f25022"/><path d="M13 4h8v8h-8z" fill="#7fba00"/><path d="M4 13h8v8H4z" fill="#00a4ef"/><path d="M13 13h8v8h-8z" fill="#ffb900"/></svg><span>MS Office</span></div>
+                <div class="tech-item"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="1.7em"
+                        height="1.7em" fill="none">
+                        <path d="M4 4h8v8H4z" fill="#f25022" />
+                        <path d="M13 4h8v8h-8z" fill="#7fba00" />
+                        <path d="M4 13h8v8H4z" fill="#00a4ef" />
+                        <path d="M13 13h8v8h-8z" fill="#ffb900" />
+                    </svg><span>MS Office</span></div>
             </div>
         </div>
     </section>
@@ -1609,7 +2004,7 @@
                                 <div class="mac-bar-spacer"></div>
                             </div>
                             <div class="mac-screen">
-                                <img src="./front pages/Quasar.png" alt="Quasar" onclick="openModal('quasar')"
+                                <img src="./project Photos/quasar/Quasar.png" alt="Quasar" onclick="openModal('quasar')"
                                     draggable="false">
                             </div>
                         </div>
@@ -1617,23 +2012,141 @@
 
                     <!-- Info -->
                     <div class="proj-info">
+                        <div class="proj-featured-badge"><i class='bx bxs-pin' style="font-size:0.75rem;"></i> Flagship
+                            Project</div>
                         <h3>Quasar</h3>
                         <p class="proj-desc">
-                            A full-stack application built with modern technologies.
-                            Featuring real-time capabilities, scalable architecture, and clean UI/UX design.
+                            A cloud-based student collaboration platform where students discover projects by skill, form
+                            teams, and manage collaborative work — all in one place. Features pgVector-powered project
+                            recommendations, real-time WebSocket chat, JWT role-based access, an invitation workflow,
+                            document sharing, and meeting notes. Backed by 35+ REST APIs documented via Swagger,
+                            deployed on AWS EC2.
                         </p>
                         <p class="tech-label">Tech Stack</p>
                         <div class="proj-tech-icons">
-                            <i class="devicon-java-plain" title="Java"></i>
-                            <i class="devicon-spring-original" title="Spring Boot"></i>
-                            <i class="devicon-react-original" title="React"></i>
-                            <i class="devicon-mysql-plain" title="MySQL"></i>
+                            <i class="devicon-java-plain colored" title="Java"></i>
+                            <i class="devicon-spring-original colored" title="Spring Boot"></i>
+                            <i class="devicon-react-original colored" title="React"></i>
+                            <i class="devicon-postgresql-plain colored" title="PostgreSQL"></i>
+                            <i class='bx bx-lock-alt' title="Spring Security + JWT"
+                                style="font-size:1.5rem;color:var(--muted);"></i>
+                            <i class='bx bx-wifi' title="WebSocket / STOMP"
+                                style="font-size:1.5rem;color:var(--muted);"></i>
+                            <span title="pgVector"
+                                style="font-family:var(--mono);font-size:0.65rem;color:var(--muted);border:1px solid var(--border);border-radius:4px;padding:2px 5px;line-height:1.5rem;display:flex;align-items:center;">pgVector</span>
                         </div>
                         <div class="proj-links">
-                            <a href="https://github.com/RasuriVIGNESH" target="_blank" class="proj-link-btn">
+                            <a href="https://github.com/RasuriVIGNESH/QUASAR" target="_blank" class="proj-link-btn">
                                 <i class='bx bxl-github'></i> Repo
                             </a>
-                            <a href="#" target="_blank" class="proj-link-btn">
+                            <a href="https://quasar-zeta-murex.vercel.app/" target="_blank"
+                                class="proj-link-btn demo-btn">
+                                <i class='bx bx-link-external'></i> Visit
+                            </a>
+                            <a href="https://quasar-final3.onrender.com/swagger-ui/index.html" target="_blank"
+                                class="proj-link-btn">
+                                <i class='bx bx-file'></i> Swagger
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ── PROJECT CARD: MergeRank ── -->
+            <div class="proj-card">
+                <div class="proj-card-body">
+                    <div class="proj-info">
+                        <h3>MergeRank</h3>
+                        <p class="proj-desc">
+                            A competitive programming analytics platform that aggregates student activity across
+                            LeetCode, GitHub, Codeforces, CodeChef, and HackerRank into a single dashboard. Features
+                            batch-scoped leaderboards so students rank within their class — not against millions
+                            globally — boosting morale and visibility. Mentors get a class-wide view with placement
+                            readiness scores, inactivity alerts, and CSV exports. Includes an AI-powered weak-area
+                            detection engine that recommends the next problems and topics based on each student's solve
+                            history.
+                        </p>
+                        <p class="tech-label">Tech Stack</p>
+                        <div class="proj-tech-icons">
+                            <i class="devicon-mongodb-plain colored" title="MongoDB"></i>
+                            <i class="devicon-express-original" title="Express.js" style="color:#e6e6e6;"></i>
+                            <i class="devicon-react-original colored" title="React"></i>
+                            <i class="devicon-nodejs-plain colored" title="Node.js"></i>
+                            <i class='bx bx-lock-alt' title="JWT Auth" style="font-size:1.5rem;color:var(--muted);"></i>
+                            <i class='bx bx-chip' title="OpenAI / Gemini AI"
+                                style="font-size:1.5rem;color:#818cf8;"></i>
+                        </div>
+                        <div class="proj-links">
+                            <a href="https://github.com/RasuriVIGNESH/MergeRank" target="_blank" class="proj-link-btn">
+                                <i class='bx bxl-github'></i> Repo
+                            </a>
+                            <a href="https://mergerank.pages.dev/" target="_blank" class="proj-link-btn demo-btn">
+                                <i class='bx bx-link-external'></i> Visit
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mac-wrap">
+                        <div class="mac-glow"></div>
+                        <div class="mac-frame">
+                            <div class="mac-bar">
+                                <div class="mac-btns">
+                                    <div class="mac-dot red"></div>
+                                    <div class="mac-dot yellow"></div>
+                                    <div class="mac-dot green"></div>
+                                </div>
+                                <span class="mac-bar-title">mergerank</span>
+                                <div class="mac-bar-spacer"></div>
+                            </div>
+                            <div class="mac-screen">
+                                <img src="./project Photos/MergeRank/landingPage.png" alt="MergeRank"
+                                    onclick="openModal('mergerank')" draggable="false">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── PROJECT CARD: SEWA ── -->
+            <div class="proj-card">
+                <div class="proj-card-body">
+                    <div class="mac-wrap">
+                        <div class="mac-glow"></div>
+                        <div class="mac-frame">
+                            <div class="mac-bar">
+                                <div class="mac-btns">
+                                    <div class="mac-dot red"></div>
+                                    <div class="mac-dot yellow"></div>
+                                    <div class="mac-dot green"></div>
+                                </div>
+                                <span class="mac-bar-title">sewa</span>
+                                <div class="mac-bar-spacer"></div>
+                            </div>
+                            <div class="mac-screen">
+                                <img src="./project Photos/sewa/hospital.png" alt="sewa" onclick="openModal('sewa')"
+                                    draggable="false">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="proj-info">
+                        <h3>SEWA</h3>
+                        <p class="proj-desc">
+                            SEWA (Sepsis Early Warning Agent) is a real-time clinical decision-support system built for
+                            Intensive Care Units (ICUs). The system monitors continuous patient vital signs and
+                            intermittent laboratory results, applies rule-based screening (SIRS, qSOFA) and an ML-based
+                            risk model (LSTM + XGBoost), and delivers explainable, auditable alerts to clinical staff —
+                            enabling earlier intervention and reducing sepsis mortality
+                        </p>
+                        <p class="tech-label">Tech Stack</p>
+                        <div class="proj-tech-icons">
+                            <i class="devicon-python-plain colored" title="Python"></i>
+                            <i class="devicon-fastapi-plain colored" title="FastAPI"></i>
+                            <i class="devicon-postgresql-plain colored" title="PostgreSQL"></i>
+                        </div>
+                        <div class="proj-links">
+                            <a href="https://github.com/RasuriVIGNESH/SEWA" target="_blank" class="proj-link-btn">
+                                <i class='bx bxl-github'></i> Repo
+                            </a>
+                            <a href="#" target="_blank" class="proj-link-btn demo-btn">
                                 <i class='bx bx-link-external'></i> Visit
                             </a>
                         </div>
@@ -1641,7 +2154,7 @@
                 </div>
             </div>
 
-            <!-- ── ADD MORE PROJECT CARDS HERE ── -->
+
 
         </div>
     </section>
@@ -1653,29 +2166,47 @@
         <h2 class="section-heading"><span class="hash">#</span> Certifications</h2>
 
         <div class="certs-grid">
-            <div class="cert-card">
-                <a href="./certificates/java-full-stack.pdf" target="_blank"
-                    style="display:block;width:100%;height:100%;text-decoration:none;">
-                    <embed src="./certificates/java-full-stack.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
-                        type="application/pdf" width="100%" height="100%"
-                        style="pointer-events:none;border-radius:6px;">
-                </a>
+            <div>
+                <div class="cert-card">
+                    <a href="./certificates/java-full-stack.pdf" target="_blank"
+                        style="display:block;width:100%;height:100%;text-decoration:none;">
+                        <embed src="./certificates/java-full-stack.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
+                            type="application/pdf" width="100%" height="100%"
+                            style="pointer-events:none;border-radius:6px;">
+                    </a>
+                </div>
+                <div class="cert-caption">
+                    <strong>Java Full Stack Development</strong>
+                    <span>Udemy</span>
+                </div>
             </div>
-            <div class="cert-card">
-                <a href="./certificates/jp-morgan-case.pdf" target="_blank"
-                    style="display:block;width:100%;height:100%;text-decoration:none;">
-                    <embed src="./certificates/jp-morgan-case.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
-                        type="application/pdf" width="100%" height="100%"
-                        style="pointer-events:none;border-radius:6px;">
-                </a>
+            <div>
+                <div class="cert-card">
+                    <a href="./certificates/jp-morgan-case.pdf" target="_blank"
+                        style="display:block;width:100%;height:100%;text-decoration:none;">
+                        <embed src="./certificates/jp-morgan-case.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
+                            type="application/pdf" width="100%" height="100%"
+                            style="pointer-events:none;border-radius:6px;">
+                    </a>
+                </div>
+                <div class="cert-caption">
+                    <strong>JPMorgan Software Engineering</strong>
+                    <span>Forage</span>
+                </div>
             </div>
-            <div class="cert-card">
-                <a href="./certificates/solutions-architecture.pdf" target="_blank"
-                    style="display:block;width:100%;height:100%;text-decoration:none;">
-                    <embed src="./certificates/solutions-architecture.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
-                        type="application/pdf" width="100%" height="100%"
-                        style="pointer-events:none;border-radius:6px;">
-                </a>
+            <div>
+                <div class="cert-card">
+                    <a href="./certificates/solutions-architecture.pdf" target="_blank"
+                        style="display:block;width:100%;height:100%;text-decoration:none;">
+                        <embed src="./certificates/solutions-architecture.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit"
+                            type="application/pdf" width="100%" height="100%"
+                            style="pointer-events:none;border-radius:6px;">
+                    </a>
+                </div>
+                <div class="cert-caption">
+                    <strong>AWS Solutions Architecture</strong>
+                    <span>Amazon Web Services</span>
+                </div>
             </div>
         </div>
     </section>
@@ -1686,11 +2217,35 @@
         <p class="stats-label">Activity</p>
         <h2 class="section-heading"><span class="hash">#</span> Coding Statistics</h2>
 
-        <div class="stats-grid">
-            <div class="stat-box">
-                <h4>GitHub</h4>
-                <img src="https://ghchart.rshah.org/RasuriVIGNESH" alt="GitHub chart">
+        <!-- GitHub 6-Month Contribution Calendar -->
+        <div class="gh-calendar-wrap" id="gh-calendar">
+            <div class="gh-calendar-header">
+                <div class="gh-title">
+                    <i class='bx bxl-github'></i>
+                    <span>GitHub Contributions</span>
+                </div>
+                <div class="gh-contrib-count" id="gh-contrib-count"></div>
             </div>
+            <div class="gh-calendar-svg-wrap" id="gh-calendar-body">
+                <div class="gh-loading">
+                    <i class='bx bx-loader-alt'></i>
+                    Loading contribution data...
+                </div>
+            </div>
+            <div class="gh-legend" id="gh-legend" style="display:none;">
+                <span>Less</span>
+                <div class="gh-legend-box" style="background:#161b22;"></div>
+                <div class="gh-legend-box" style="background:#0e4429;"></div>
+                <div class="gh-legend-box" style="background:#006d32;"></div>
+                <div class="gh-legend-box" style="background:#26a641;"></div>
+                <div class="gh-legend-box" style="background:#39d353;"></div>
+                <span>More</span>
+            </div>
+        </div>
+        <div class="gh-tooltip" id="gh-tooltip"></div>
+
+        <!-- LeetCode -->
+        <div class="stats-grid" style="margin-top: 2rem;">
             <div class="stat-box">
                 <h4>LeetCode</h4>
                 <img src="https://leetcard.jacoblin.cool/RASURI_VIGNESH?theme=dark&font=Poppins&ext=heatmap"
@@ -1718,30 +2273,47 @@
                     feel free to reach out!
                 </p>
 
-                <form id="contact-form" onsubmit="return false;">
+                <form id="contact-form" action="https://formspree.io/vignesh.rasuri2004@gmail.com" method="POST">
                     <div class="form-row-2">
                         <div class="form-group">
                             <label for="c-name">Name</label>
-                            <input type="text" id="c-name" placeholder="Your name" required>
+                            <input type="text" id="c-name" name="name" placeholder="Your name" required>
                         </div>
                         <div class="form-group">
                             <label for="c-email">Email</label>
-                            <input type="email" id="c-email" placeholder="your.email@example.com" required>
+                            <input type="email" id="c-email" name="email" placeholder="your.email@example.com" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="c-subject">Subject</label>
-                        <input type="text" id="c-subject" placeholder="What would you like to discuss?">
+                        <input type="text" id="c-subject" name="subject" placeholder="What would you like to discuss?">
                     </div>
                     <div class="form-group">
                         <label for="c-message">Message</label>
-                        <textarea id="c-message" placeholder="Tell me about your project or idea..."></textarea>
+                        <textarea id="c-message" name="message"
+                            placeholder="Tell me about your project or idea..."></textarea>
                     </div>
                     <button type="submit" class="shimmer-btn">
                         <i class='bx bx-rocket'></i>
                         <span class="btn-label">Send Message</span>
                     </button>
                 </form>
+
+                <div class="form-success" id="form-success">
+                    <i class='bx bx-check-circle'></i>
+                    Message sent! I'll get back to you soon.
+                </div>
+
+                <div class="contact-socials">
+                    <a href="/cdn-cgi/l/email-protection#dcaab5bbb2b9afb4f2aebdafa9aeb5eeecece89cbbb1bdb5b0f2bfb3b1"
+                        class="contact-social-link">
+                        <i class='bx bx-envelope'></i> <span class="__cf_email__"
+                            data-cfemail="26504f414843554e0854475553544f1416161266414b474f4a0845494b">[email&#160;protected]</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/rasurivignesh/" target="_blank" class="contact-social-link">
+                        <i class='bx bxl-linkedin'></i> linkedin.com/in/rasurivignesh
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -1779,8 +2351,8 @@
             </div>
             <div class="float-item" id="fi-1">
                 <span class="float-label">LinkedIn</span>
-                <a href="https://www.linkedin.com/in/vignesh-rasuri-004191292/" target="_blank"
-                    class="float-icon-btn"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://www.linkedin.com/in/rasurivignesh/" target="_blank" class="float-icon-btn"><i
+                        class='bx bxl-linkedin'></i></a>
             </div>
             <div class="float-item" id="fi-2">
                 <span class="float-label">GitHub</span>
@@ -1803,10 +2375,20 @@
                 <div class="modal-links">
                     <a href="#" id="modal-github" target="_blank"><i class='bx bxl-github'></i></a>
                     <a href="#" id="modal-live" target="_blank"><i class='bx bx-world'></i></a>
+                    <a href="#" id="modal-swagger" target="_blank" style="display:none;"><i class='bx bx-file'></i></a>
                 </div>
             </div>
             <div class="modal-body">
-                <img id="modal-main-image" src="" alt="Project Image">
+                <div class="slider-container" id="modal-slider">
+                    <div class="slider-wrapper" id="slider-wrapper">
+                        <!-- Slides dynamically injected -->
+                    </div>
+                    <button class="slider-nav slider-prev" id="prev-btn" onclick="moveSlide(-1)"><i
+                            class='bx bx-chevron-left'></i></button>
+                    <button class="slider-nav slider-next" id="next-btn" onclick="moveSlide(1)"><i
+                            class='bx bx-chevron-right'></i></button>
+                    <div class="slider-dots" id="slider-dots"></div>
+                </div>
                 <div class="modal-details">
                     <h3>Description</h3>
                     <p id="modal-description"></p>
@@ -1819,17 +2401,83 @@
 
 
     <!-- ══════════════ SCRIPTS ══════════════ -->
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
+        /* ─── FORMSPREE CONTACT FORM ─── */
+        const contactForm = document.getElementById('contact-form');
+        const formSuccess = document.getElementById('form-success');
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = contactForm.querySelector('button[type="submit"]');
+                const label = btn.querySelector('.btn-label');
+                btn.disabled = true;
+                label.textContent = 'Sending…';
+                try {
+                    const res = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: new FormData(contactForm),
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (res.ok) {
+                        contactForm.style.display = 'none';
+                        formSuccess.style.display = 'block';
+                    } else {
+                        label.textContent = 'Failed — try again';
+                        btn.disabled = false;
+                    }
+                } catch {
+                    label.textContent = 'Error — try again';
+                    btn.disabled = false;
+                }
+            });
+        }
+
         /* ─── PROJECT DATA ─── */
         const PROJECTS = {
+            mergerank: {
+                title: 'MergeRank',
+                description: 'A competitive programming analytics platform that aggregates student activity across LeetCode, GitHub, Codeforces, CodeChef, and HackerRank into a single dashboard. Features batch-scoped leaderboards so students rank within their class — not against millions globally — boosting morale and visibility. Mentors get a class-wide view with placement readiness scores, inactivity alerts, and CSV exports. Includes an AI-powered weak-area detection engine that recommends the next problems and topics based on each student\'s solve history.',
+                github: 'https://github.com/RasuriVIGNESH/MergeRank',
+                live: 'https://mergerank.pages.dev/',
+                tech: 'MongoDB · Express.js · React · Node.js · JWT · OpenAI / Gemini AI',
+                images: [
+                    "./project Photos/MergeRank/landingPage.png",
+                    "./project Photos/MergeRank/studentDashboard.png",
+                    "./project Photos/MergeRank/studentBatches.png",
+                    "./project Photos/MergeRank/studentprofile.png",
+                    "./project Photos/MergeRank/mentorDashboard.png",
+                    "./project Photos/MergeRank/leaderboard.png",
+                    "./project Photos/MergeRank/AIsuggessions.png"
+                ]
+            },
             quasar: {
                 title: 'Quasar',
-                description: 'A full-stack application built with modern technologies. ' +
-                    'Featuring real-time capabilities, scalable architecture, and clean UI/UX design.',
-                github: 'https://github.com/RasuriVIGNESH',
+                description: 'A cloud-based student collaboration platform where students discover projects by skill, form teams, and manage collaborative work in one place. Features pgVector-powered smart project recommendations, real-time WebSocket messaging, JWT-secured role-based access control, a full team invitation workflow, document management, and timestamped meeting notes. Built with 35+ REST APIs documented via Swagger, with OAuth2 authentication and deployed on AWS EC2 backed by PostgreSQL.',
+                github: 'https://github.com/RasuriVIGNESH/QUASAR',
+                live: 'https://quasar-zeta-murex.vercel.app/',
+                swagger: 'https://quasar-final3.onrender.com/swagger-ui/index.html',
+                tech: 'Java · Spring Boot · React · PostgreSQL · WebSocket · pgVector',
+                images: [
+                    "./project%20Photos/quasar/Quasar.png",
+                    "./project%20Photos/quasar/dashboard.png",
+                    "./project%20Photos/quasar/projectMainPage.png",
+                    "./project%20Photos/quasar/communicationPage.png",
+                    "./project%20Photos/quasar/invitationPage.png",
+                    "./project%20Photos/quasar/my%20Projects%20page.png"
+
+                ]
+            },
+            sewa: {
+                title: 'SEWA',
+                description: 'SEWA (Sepsis Early Warning Agent) is a real-time clinical decision-support system built for Intensive Care Units (ICUs). The system monitors continuous patient vital signs and intermittent laboratory results, applies rule-based screening (SIRS, qSOFA) and an ML-based risk model (LSTM + XGBoost), and delivers explainable, auditable alerts to clinical staff — enabling earlier intervention and reducing sepsis mortality',
+                github: 'https://github.com/RasuriVIGNESH/SEWA',
                 live: '#',
-                tech: 'Java · Spring Boot · React · MySQL',
-                image: "./front pages/Quasar.png"
+                tech: 'Python · FastAPI · PostgreSQL · ML (LSTM + XGBoost)',
+                images: [
+                    "./project Photos/sewa/hospital.png",
+                    "./project Photos/sewa/doctorDashboard.png"
+                ]
             }
         };
 
@@ -1964,30 +2612,329 @@
             techObs.observe(item);
         });
 
-        /* ─── MODAL ─── */
+        /* ─── MODAL SLIDER (cover-push, 3s auto-advance) ─── */
+        let currentSlide = 0;
+        let slidesData = [];
+        let modalTimer = null;
+        let isAnimating = false;
+
         function openModal(id) {
             const p = PROJECTS[id];
             if (!p) return;
+
             document.getElementById('modal-title').textContent = p.title;
             document.getElementById('modal-description').textContent = p.description;
             document.getElementById('modal-tech-stack').textContent = p.tech;
-            document.getElementById('modal-main-image').src = p.image;
             document.getElementById('modal-github').href = p.github;
             document.getElementById('modal-live').href = p.live;
+
+            const swaggerBtn = document.getElementById('modal-swagger');
+            if (p.swagger) {
+                swaggerBtn.href = p.swagger;
+                swaggerBtn.style.display = 'inline-flex';
+            } else {
+                swaggerBtn.style.display = 'none';
+            }
+
+            const wrapper = document.getElementById('slider-wrapper');
+            const dotsContainer = document.getElementById('slider-dots');
+            wrapper.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            slidesData = p.images || (p.image ? [p.image] : []);
+            currentSlide = 0;
+            isAnimating = false;
+
+            slidesData.forEach((src, idx) => {
+                const slide = document.createElement('div');
+                slide.className = 'slide' + (idx === 0 ? ' active' : '');
+
+                if (src.toLowerCase().endsWith('.pdf')) {
+                    const embed = document.createElement('embed');
+                    embed.src = src + '#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+                    embed.type = 'application/pdf';
+                    slide.appendChild(embed);
+                } else {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = p.title + ' screenshot ' + (idx + 1);
+                    img.loading = 'lazy';
+                    slide.appendChild(img);
+                }
+                wrapper.appendChild(slide);
+
+                if (slidesData.length > 1) {
+                    const dot = document.createElement('button');
+                    dot.className = 'slider-dot' + (idx === 0 ? ' active' : '');
+                    dot.addEventListener('click', () => goToSlide(idx, idx > currentSlide ? 'right' : 'left'));
+                    dotsContainer.appendChild(dot);
+                }
+            });
+
+            const showNav = slidesData.length > 1;
+            document.getElementById('prev-btn').style.display = showNav ? 'flex' : 'none';
+            document.getElementById('next-btn').style.display = showNav ? 'flex' : 'none';
+            dotsContainer.style.display = showNav ? 'flex' : 'none';
+
             document.getElementById('project-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            startModalTimer();
         }
 
-        document.getElementById('close-modal').addEventListener('click', () =>
-            document.getElementById('project-modal').classList.remove('active')
-        );
+        function goToSlide(idx, direction) {
+            if (isAnimating || !slidesData.length) return;
+            const total = slidesData.length;
+            const next = ((idx % total) + total) % total;
+            if (next === currentSlide) return;
+
+            const dir = direction || (next > currentSlide ? 'right' : 'left');
+            const slides = document.querySelectorAll('#slider-wrapper .slide');
+            const enterClass = dir === 'right' ? 'enter-right' : 'enter-left';
+
+            isAnimating = true;
+            slides[currentSlide].classList.remove('active');
+            slides[next].classList.add(enterClass);
+
+            slides[next].addEventListener('animationend', () => {
+                slides[next].classList.remove(enterClass);
+                slides[next].classList.add('active');
+                isAnimating = false;
+            }, { once: true });
+
+            currentSlide = next;
+
+            // Update dots
+            document.querySelectorAll('.slider-dot').forEach((d, i) =>
+                d.classList.toggle('active', i === currentSlide));
+        }
+
+        function moveSlide(step) {
+            clearModalTimer();
+            const total = slidesData.length;
+            goToSlide((currentSlide + step + total) % total, step > 0 ? 'right' : 'left');
+            startModalTimer();
+        }
+
+        function startModalTimer() {
+            clearModalTimer();
+            if (slidesData.length > 1) {
+                modalTimer = setInterval(() => {
+                    goToSlide((currentSlide + 1) % slidesData.length, 'right');
+                }, 3000);
+            }
+        }
+
+        function clearModalTimer() {
+            if (modalTimer) { clearInterval(modalTimer); modalTimer = null; }
+        }
+
+        function closeModal() {
+            document.getElementById('project-modal').classList.remove('active');
+            document.body.style.overflow = '';
+            clearModalTimer();
+        }
+
+        document.getElementById('close-modal').addEventListener('click', closeModal);
         document.getElementById('project-modal').addEventListener('click', e => {
-            if (e.target === e.currentTarget)
-                e.currentTarget.classList.remove('active');
+            if (e.target === e.currentTarget) closeModal();
         });
         document.addEventListener('keydown', e => {
-            if (e.key === 'Escape')
-                document.getElementById('project-modal').classList.remove('active');
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowRight') moveSlide(1);
+            if (e.key === 'ArrowLeft') moveSlide(-1);
         });
+
+        /* ─── GITHUB 6-MONTH CONTRIBUTION CALENDAR ─── */
+        (async function renderGHCalendar() {
+            const USERNAME = 'RasuriVIGNESH';
+            const MONTHS = 8;
+            const CELL = 15;      // cell size pxs
+            const GAP = 3;        // gap between cells
+            const CORNER = 3;     // border-radius
+            const DAY_LABELS = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
+            const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const COLORS = ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'];
+
+            const body = document.getElementById('gh-calendar-body');
+            const tooltip = document.getElementById('gh-tooltip');
+            const contribEl = document.getElementById('gh-contrib-count');
+            const legendEl = document.getElementById('gh-legend');
+
+            // Build date range: last 6 months
+            const today = new Date();
+            const fromDate = new Date(today);
+            fromDate.setMonth(fromDate.getMonth() - MONTHS);
+            // Start from the beginning of the week (Sunday)
+            fromDate.setDate(fromDate.getDate() - fromDate.getDay());
+
+            // Generate all days in range
+            const days = [];
+            const d = new Date(fromDate);
+            while (d <= today) {
+                days.push(new Date(d));
+                d.setDate(d.getDate() + 1);
+            }
+
+            // Try to fetch real contribution data
+            let contribMap = {};
+            let totalContribs = 0;
+            let fetchSuccess = false;
+
+            try {
+                // Use GitHub's contribution page (scrape SVG data)
+                const resp = await fetch(`https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`);
+                if (resp.ok) {
+                    const data = await resp.json();
+                    if (data && data.contributions) {
+                        data.contributions.forEach(row => {
+                            contribMap[row.date] = row.count;
+                        });
+                        totalContribs = data.total && data.total.lastYear ? data.total.lastYear : 0;
+                        fetchSuccess = true;
+                    }
+                }
+            } catch (e) {
+                console.warn('GitHub contributions API failed, trying fallback...', e);
+            }
+
+            // Fallback: try ghchart-based approach
+            if (!fetchSuccess) {
+                try {
+                    const resp2 = await fetch(`https://github-contributions-api.deno.dev/${USERNAME}.json`);
+                    if (resp2.ok) {
+                        const data2 = await resp2.json();
+                        if (data2 && data2.contributions) {
+                            data2.contributions.flat().forEach(row => {
+                                if (row.date) contribMap[row.date] = row.count || 0;
+                            });
+                            fetchSuccess = true;
+                        }
+                    }
+                } catch (e2) {
+                    console.warn('Fallback API also failed:', e2);
+                }
+            }
+
+            // Calculate contribution level (0-4)
+            function getLevel(count) {
+                if (count <= 0) return 0;
+                if (count <= 3) return 1;
+                if (count <= 6) return 2;
+                if (count <= 9) return 3;
+                return 4;
+            }
+
+            // Format date
+            function fmtDate(dt) {
+                const y = dt.getFullYear();
+                const m = String(dt.getMonth() + 1).padStart(2, '0');
+                const dd = String(dt.getDate()).padStart(2, '0');
+                return `${y}-${m}-${dd}`;
+            }
+
+            function fmtDateReadable(dt) {
+                return dt.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+            }
+
+            // Build weeks
+            const weeks = [];
+            let currentWeek = [];
+            days.forEach((day, i) => {
+                currentWeek.push(day);
+                if (day.getDay() === 6 || i === days.length - 1) {
+                    weeks.push(currentWeek);
+                    currentWeek = [];
+                }
+            });
+
+            // Calculate 6-month total
+            let sixMonthTotal = 0;
+            days.forEach(day => {
+                const key = fmtDate(day);
+                sixMonthTotal += (contribMap[key] || 0);
+            });
+
+            // SVG dimensions
+            const labelWidth = 36;
+            const topPad = 22;
+            const svgW = labelWidth + weeks.length * (CELL + GAP) + GAP;
+            const svgH = topPad + 7 * (CELL + GAP) + GAP;
+
+            // Build SVG
+            let svg = `<svg width="${svgW}" height="${svgH}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="GitHub contribution calendar">`;
+
+            // Month labels
+            let lastMonth = -1;
+            weeks.forEach((week, wi) => {
+                const firstDay = week[0];
+                if (firstDay.getMonth() !== lastMonth) {
+                    lastMonth = firstDay.getMonth();
+                    const x = labelWidth + wi * (CELL + GAP);
+                    svg += `<text x="${x}" y="14" fill="#8b949e" font-size="11" font-family="'JetBrains Mono', monospace">${MONTH_NAMES[lastMonth]}</text>`;
+                }
+            });
+
+            // Day-of-week labels
+            DAY_LABELS.forEach((label, i) => {
+                if (label) {
+                    const y = topPad + i * (CELL + GAP) + CELL - 2;
+                    svg += `<text x="0" y="${y}" fill="#8b949e" font-size="10" font-family="'JetBrains Mono', monospace">${label}</text>`;
+                }
+            });
+
+            // Day cells
+            weeks.forEach((week, wi) => {
+                week.forEach(day => {
+                    const dow = day.getDay();
+                    const key = fmtDate(day);
+                    const count = contribMap[key] || 0;
+                    const level = getLevel(count);
+                    const x = labelWidth + wi * (CELL + GAP);
+                    const y = topPad + dow * (CELL + GAP);
+                    const color = COLORS[level];
+                    svg += `<rect x="${x}" y="${y}" width="${CELL}" height="${CELL}" rx="${CORNER}" ry="${CORNER}" fill="${color}" data-date="${key}" data-count="${count}" data-readable="${fmtDateReadable(day)}" class="gh-cell" style="outline:1px solid rgba(27,31,35,0.06);cursor:pointer;transition:filter 0.15s;"/>`;
+                });
+            });
+
+            svg += '</svg>';
+
+            body.innerHTML = svg;
+            legendEl.style.display = 'flex';
+
+            // Update contribution count text
+            if (fetchSuccess) {
+                contribEl.innerHTML = `<span>${sixMonthTotal.toLocaleString()}</span> contributions in the last 6 months`;
+            } else {
+                contribEl.textContent = 'Last 6 months';
+            }
+
+            // Tooltip interaction
+            body.addEventListener('mousemove', e => {
+                const cell = e.target.closest('.gh-cell');
+                if (cell) {
+                    const count = cell.dataset.count;
+                    const readable = cell.dataset.readable;
+                    tooltip.innerHTML = `<strong>${count} contribution${count !== '1' ? 's' : ''}</strong> on ${readable}`;
+                    tooltip.classList.add('visible');
+                    tooltip.style.left = (e.clientX + 12) + 'px';
+                    tooltip.style.top = (e.clientY - 36) + 'px';
+                    cell.style.filter = 'brightness(1.4)';
+                } else {
+                    tooltip.classList.remove('visible');
+                }
+            });
+
+            body.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('visible');
+                body.querySelectorAll('.gh-cell').forEach(c => c.style.filter = '');
+            });
+
+            body.querySelectorAll('.gh-cell').forEach(cell => {
+                cell.addEventListener('mouseleave', () => {
+                    cell.style.filter = '';
+                });
+            });
+        })();
     </script>
 
 </body>
