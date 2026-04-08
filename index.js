@@ -60,8 +60,8 @@ const projectData = {
         github: "#",
         live: "#",
         images: [
-            "./project Photos/gate mind/logo.png",
-            "./project Photos/gate mind/screening round.png"
+            "./project-Photos/gate mind/logo.png",
+            "./project-Photos/gate mind/screening round.png"
         ]
     }
 };
