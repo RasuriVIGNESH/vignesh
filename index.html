@@ -332,8 +332,148 @@
         }
 
         /* ============================================================
-       HERO
+       HERO — REDESIGNED: Geometric Aurora
     ============================================================ */
+        @keyframes heroAurora1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.6;
+            }
+
+            33% {
+                transform: translate(60px, -40px) scale(1.15);
+                opacity: 0.9;
+            }
+
+            66% {
+                transform: translate(-30px, 50px) scale(0.9);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes heroAurora2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.4;
+            }
+
+            33% {
+                transform: translate(-50px, 60px) scale(1.2);
+                opacity: 0.8;
+            }
+
+            66% {
+                transform: translate(70px, -30px) scale(0.85);
+                opacity: 0.6;
+            }
+        }
+
+        @keyframes heroAurora3 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translate(-40px, -50px) scale(1.1);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes floatPhoto {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-14px);
+            }
+        }
+
+        @keyframes ringRotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes ringRotateRev {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(-360deg);
+            }
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 30px rgba(56, 189, 248, 0.3), 0 0 60px rgba(129, 140, 248, 0.15);
+            }
+
+            50% {
+                box-shadow: 0 0 50px rgba(56, 189, 248, 0.5), 0 0 100px rgba(129, 140, 248, 0.3);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes typeReveal {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes gridLinesFade {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
         #home {
             position: relative;
             min-height: 100vh;
@@ -341,110 +481,334 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            background: #030812;
         }
 
-        /* subtle central glow */
-        #home::before {
+        /* Animated grid background */
+        #home::after {
             content: '';
             position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+            animation: gridLinesFade 2s ease 0.5s both;
+        }
+
+        /* Aurora blobs */
+        .hero-aurora {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-aurora-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.45) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            animation: heroAurora1 12s ease-in-out infinite;
+        }
+
+        .hero-aurora-2 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.35) 0%, transparent 70%);
+            bottom: -150px;
+            right: -100px;
+            animation: heroAurora2 15s ease-in-out infinite;
+        }
+
+        .hero-aurora-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(52, 211, 153, 0.25) 0%, transparent 70%);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80vw;
-            height: 60vh;
-            background: radial-gradient(ellipse at center,
-                    rgba(14, 30, 70, 0.5) 0%,
-                    rgba(30, 58, 100, 0.25) 50%,
-                    transparent 80%);
-            pointer-events: none;
-            z-index: 1;
+            animation: heroAurora3 10s ease-in-out infinite;
         }
 
         #tsparticles-hero {
             position: absolute;
             inset: 0;
-            z-index: 1;
+            z-index: 2;
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             width: 100%;
-            max-width: 1150px;
+            max-width: 1200px;
             padding: 0 2.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 3rem;
+            gap: 4rem;
         }
 
         .hero-text {
             flex: 1;
+            opacity: 0;
+            animation: slideInLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+        }
+
+        /* Greeting tag */
+        .hero-greeting {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.3rem 1rem 0.3rem 0.5rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: rgba(56, 189, 248, 0.06);
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--sky);
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-greeting-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--teal);
+            box-shadow: 0 0 8px var(--teal);
+            animation: pulseGlow 1.5s ease-in-out infinite;
         }
 
         .hero-text h1 {
-            font-size: clamp(2.2rem, 5.5vw, 3.9rem);
-            font-weight: 800;
+            font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+            font-weight: 900;
             color: white;
-            line-height: 1.15;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-name-line {
+            display: block;
+            position: relative;
+        }
+
+        /* Underline accent on name */
+        .hero-name-accent {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-name-accent::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--sky), var(--teal));
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: typeReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
+        }
+
+        .hero-role {
+            font-family: var(--mono);
+            font-size: clamp(0.85rem, 1.8vw, 1.05rem);
+            color: var(--sky);
+            font-weight: 500;
             margin-bottom: 1.2rem;
-            opacity: 0;
-            animation: fadeUp 0.5s ease 0.1s forwards;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-role .bracket {
+            color: rgba(56, 189, 248, 0.4);
         }
 
         .hero-text p {
-            font-family: var(--mono);
-            font-size: clamp(0.78rem, 1.8vw, 0.98rem);
-            color: #cbd5e1;
-            max-width: 460px;
-            line-height: 1.85;
-            opacity: 0;
-            animation: fadeUp 0.5s ease 0.25s forwards;
+            font-size: clamp(0.82rem, 1.6vw, 0.97rem);
+            color: #94a3b8;
+            max-width: 480px;
+            line-height: 1.9;
         }
 
         .hero-text .accent-underline {
-            border-bottom: 2px solid var(--sky);
-            font-weight: 700;
             color: var(--sky);
+            font-weight: 600;
+        }
+
+        /* Stats row */
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin: 1.5rem 0 1.8rem;
+        }
+
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero-stat-num {
+            font-family: var(--mono);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1;
+        }
+
+        .hero-stat-num span {
+            color: var(--teal);
+        }
+
+        .hero-stat-label {
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-top: 0.25rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .hero-stat-divider {
+            width: 1px;
+            background: rgba(148, 163, 184, 0.2);
+            align-self: stretch;
         }
 
         /* Photo */
         .hero-photo-wrap {
             flex: 0 0 auto;
-            width: clamp(200px, 28vw, 360px);
-            height: clamp(200px, 28vw, 360px);
+            width: clamp(220px, 28vw, 360px);
+            height: clamp(220px, 28vw, 360px);
             position: relative;
             opacity: 0;
-            animation: fadeIn 0.7s ease 0.35s forwards;
+            animation: slideInRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
         }
 
-        .hero-photo-wrap::before {
+        /* Floating animation on photo container */
+        .hero-photo-float {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            animation: floatPhoto 6s ease-in-out infinite;
+        }
+
+        /* Rotating ring 1 */
+        .hero-ring {
+            position: absolute;
+            border-radius: 50%;
+            border-style: solid;
+            pointer-events: none;
+        }
+
+        .hero-ring-1 {
+            inset: -16px;
+            border-width: 2px;
+            border-color: rgba(56, 189, 248, 0.3) rgba(56, 189, 248, 0.1) rgba(56, 189, 248, 0.3) rgba(56, 189, 248, 0.1);
+            animation: ringRotate 8s linear infinite;
+        }
+
+        .hero-ring-2 {
+            inset: -30px;
+            border-width: 1px;
+            border-color: rgba(129, 140, 248, 0.25) transparent rgba(129, 140, 248, 0.25) transparent;
+            animation: ringRotateRev 14s linear infinite;
+        }
+
+        /* Corner brackets */
+        .hero-corner {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+        }
+
+        .hero-corner::before,
+        .hero-corner::after {
             content: '';
             position: absolute;
-            inset: -5px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #60a5fa, #34d399, #818cf8, #38bdf8);
-            background-size: 400% 400%;
-            animation: gradX 5s ease infinite;
-            z-index: 0;
+            background: var(--sky);
         }
 
-        .hero-photo-wrap img {
+        .hero-corner::before {
+            width: 100%;
+            height: 2px;
+            top: 0;
+            left: 0;
+        }
+
+        .hero-corner::after {
+            width: 2px;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .hero-corner.tl {
+            top: 4px;
+            left: 4px;
+        }
+
+        .hero-corner.tr {
+            top: 4px;
+            right: 4px;
+            transform: scaleX(-1);
+        }
+
+        .hero-corner.bl {
+            bottom: 4px;
+            left: 4px;
+            transform: scaleY(-1);
+        }
+
+        .hero-corner.br {
+            bottom: 4px;
+            right: 4px;
+            transform: scale(-1);
+        }
+
+        /* Photo circle */
+        .hero-photo-inner {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             width: 100%;
             height: 100%;
             border-radius: 50%;
+            overflow: hidden;
+            animation: glowPulse 4s ease-in-out infinite;
+            border: 3px solid rgba(56, 189, 248, 0.5);
+        }
+
+        .hero-photo-inner img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             object-position: top;
-            border: 5px solid var(--bg);
             display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-photo-inner:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Glowing backdrop behind photo */
+        .hero-photo-glow {
+            position: absolute;
+            inset: -20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+            z-index: 0;
         }
 
         /* Scroll hint */
         .hero-scroll-hint {
             position: absolute;
-            bottom: 4.5rem;
+            bottom: 2.5rem;
             left: 50%;
             transform: translateX(-50%);
             z-index: 3;
@@ -453,10 +817,10 @@
             align-items: center;
             gap: 0.4rem;
             text-decoration: none;
-            color: #64748b;
+            color: #475569;
             transition: color 0.3s;
             opacity: 0;
-            animation: fadeIn 0.5s ease 0.5s forwards;
+            animation: fadeIn 0.5s ease 1.2s forwards;
         }
 
         .hero-scroll-hint:hover {
@@ -465,8 +829,12 @@
 
         .terminal-hint {
             font-family: var(--mono);
-            font-size: 0.85rem;
-            letter-spacing: 0.03em;
+            font-size: 0.78rem;
+            letter-spacing: 0.04em;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            background: rgba(56, 189, 248, 0.06);
+            border: 1px solid rgba(56, 189, 248, 0.15);
         }
 
         .terminal-hint .dollar {
@@ -485,7 +853,7 @@
         }
 
         .chevrons i {
-            font-size: 1.2rem;
+            font-size: 1rem;
             line-height: 1;
         }
 
@@ -1375,51 +1743,199 @@
         }
 
         /* ============================================================
-           PROJECTS — Carousel
+           PROJECTS — Scroll-Snap Sticky
         ============================================================ */
-        .proj-carousel {
+
+        /* The outer section becomes a tall scroll container */
+        #projects {
+            padding: 6rem 0 0 0;
+            max-width: 100%;
+            margin: 0;
+        }
+
+        #projects .section-heading {
+            padding: 0 2.5rem;
+            max-width: 1100px;
+            margin: 0 auto 0;
+            display: block;
+        }
+
+        /* Scroll-snap wrapper: height = number of projects * 100vh */
+        .proj-scroll-outer {
             position: relative;
+            height: calc(3 * 100vh);
+            /* 3 projects */
         }
 
-        /* Viewport — clips the sliding track */
-        .proj-carousel-viewport {
-            overflow: hidden;
-            border-radius: 1.1rem;
-        }
-
-        /* Track holds all cards side-by-side */
-        .proj-carousel-track {
+        /* Sticky frame that stays while user scrolls through projects */
+        .proj-sticky-frame {
+            position: sticky;
+            top: 0;
+            height: 100vh;
             display: flex;
-            transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
 
-        /* Each card */
-        .proj-grid-card {
-            flex: 0 0 100%;
+        /* Progress bar on left edge */
+        .proj-progress-bar {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            z-index: 10;
+        }
+
+        .proj-prog-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(148, 163, 184, 0.25);
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .proj-prog-dot.active {
+            background: var(--sky);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+            height: 28px;
+            border-radius: 4px;
+            border-color: var(--sky);
+        }
+
+        /* Counter badge */
+        .proj-scroll-counter {
+            position: absolute;
+            right: 2rem;
+            bottom: 2.5rem;
+            font-family: var(--mono);
+            font-size: 0.75rem;
+            color: var(--muted);
+            z-index: 10;
+        }
+
+        .proj-scroll-counter span {
+            color: var(--sky);
+            font-weight: 700;
+        }
+
+        /* Scroll hint */
+        .proj-scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: rgba(148, 163, 184, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        /* Card stage */
+        .proj-card-stage {
+            position: relative;
             width: 100%;
-            background: linear-gradient(135deg, rgba(12, 20, 38, 0.95), rgba(14, 24, 44, 0.9));
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            border-radius: 1.1rem;
+            max-width: 1100px;
+            padding: 0 2.5rem;
+            height: 520px;
+            overflow: hidden;
+            /* clip-path needs contained overflow */
+        }
+
+        /* ── CINEMATIC SWEEP TRANSITION ──
+           Cards slide across with a diagonal clip-path reveal +
+           blur + scale — like a film frame changing. */
+
+        .proj-scroll-card {
+            position: absolute;
+            inset: 0;
+            margin: 0 2.5rem;
+            background: rgba(8, 14, 30, 0.98);
+            border: 1px solid rgba(148, 163, 184, 0.12);
+            border-radius: 1.5rem;
             overflow: hidden;
             display: flex;
-            flex-direction: row;
-            transition: border-color 0.35s, box-shadow 0.35s;
+            flex-direction: column;
+            /* default state: hidden below, waiting */
+            opacity: 0;
+            transform: translateY(48px) scale(0.94);
+            filter: blur(12px);
+            clip-path: inset(6% 6% 6% 6% round 1.5rem);
+            transition:
+                opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                filter 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                clip-path 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.4s ease,
+                box-shadow 0.4s ease;
+            pointer-events: none;
+            will-change: opacity, transform, filter, clip-path;
         }
 
-        .proj-grid-card:hover {
-            border-color: rgba(56, 189, 248, 0.35);
-            box-shadow: 0 8px 48px rgba(56, 189, 248, 0.09);
+        /* ── ACTIVE: fully revealed ── */
+        .proj-scroll-card.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0px);
+            clip-path: inset(0% 0% 0% 0% round 1.5rem);
+            pointer-events: all;
+            border-color: rgba(56, 189, 248, 0.28);
+            box-shadow:
+                0 24px 70px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(56, 189, 248, 0.09),
+                0 0 80px rgba(56, 189, 248, 0.05);
         }
 
-        /* Left image panel */
+        /* ── EXIT FORWARD (scroll down): card sweeps up-left ── */
+        .proj-scroll-card.exit-forward {
+            opacity: 0;
+            transform: translateY(-52px) translateX(-30px) scale(0.92) rotate(-1.5deg);
+            filter: blur(10px);
+            clip-path: inset(0% 100% 0% 0% round 1.5rem);
+            transition:
+                opacity 0.65s cubic-bezier(0.55, 0, 1, 0.45),
+                transform 0.65s cubic-bezier(0.55, 0, 1, 0.45),
+                filter 0.65s cubic-bezier(0.55, 0, 1, 0.45),
+                clip-path 0.65s cubic-bezier(0.55, 0, 1, 0.45);
+        }
+
+        /* ── EXIT BACKWARD (scroll up): card drops down-right ── */
+        .proj-scroll-card.exit-backward {
+            opacity: 0;
+            transform: translateY(52px) translateX(30px) scale(0.92) rotate(1.5deg);
+            filter: blur(10px);
+            clip-path: inset(0% 0% 0% 100% round 1.5rem);
+            transition:
+                opacity 0.65s cubic-bezier(0.55, 0, 1, 0.45),
+                transform 0.65s cubic-bezier(0.55, 0, 1, 0.45),
+                filter 0.65s cubic-bezier(0.55, 0, 1, 0.45),
+                clip-path 0.65s cubic-bezier(0.55, 0, 1, 0.45);
+        }
+
+        /* ── IMAGE-DOMINANT LAYOUT ── */
+        /* Top image panel — big */
         .pgc-img-panel {
-            flex: 0 0 44%;
-            max-width: 44%;
-            min-height: 360px;
+            flex: 0 0 62%;
+            width: 100%;
+            max-width: 100%;
+            min-height: unset;
             position: relative;
             overflow: hidden;
-            background: rgba(10, 18, 34, 0.7);
+            background: rgba(5, 10, 20, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .pgc-img-panel img {
@@ -1428,94 +1944,137 @@
             object-fit: cover;
             object-position: top;
             display: block;
-            transition: transform 0.45s ease;
+            transition: transform 0.5s ease;
         }
 
-        .proj-grid-card:hover .pgc-img-panel img {
-            transform: scale(1.04);
+        .proj-scroll-card.active .pgc-img-panel img {
+            transform: scale(1.0);
         }
 
-        /* Right info panel */
+        .proj-scroll-card.active:hover .pgc-img-panel img {
+            transform: scale(1.03);
+        }
+
+        /* Bottom gradient fade on image */
+        .pgc-img-panel::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 90px;
+            background: linear-gradient(to top, rgba(8, 14, 30, 1) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* Number badge on image */
+        .pgc-num-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-family: var(--mono);
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.75);
+            background: rgba(0, 0, 0, 0.42);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.25rem 0.65rem;
+            border-radius: 9999px;
+            z-index: 2;
+        }
+
+        /* Bottom info strip — compact horizontal row */
         .pgc-body {
-            flex: 1;
-            padding: 2rem 2.25rem;
+            flex: 0 0 auto;
+            padding: 0.85rem 1.5rem 1rem;
             display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+            min-width: 0;
+            background: rgba(8, 14, 30, 0.99);
+        }
+
+        /* Left part of info: title + short desc */
+        .pgc-info-left {
+            flex: 1;
             min-width: 0;
         }
 
         .pgc-top {
             display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: 0.65rem;
-            gap: 0.75rem;
+            align-items: center;
+            gap: 0.65rem;
+            margin-bottom: 0.3rem;
         }
 
         .pgc-body h3 {
-            font-size: 1.5rem;
+            font-size: 1.15rem;
             font-weight: 800;
             color: white;
-            letter-spacing: -0.01em;
+            letter-spacing: -0.02em;
+            white-space: nowrap;
         }
 
         .pgc-body .proj-desc {
-            color: var(--text);
-            font-family: var(--mono);
-            font-size: 0.82rem;
-            line-height: 1.85;
-            margin-bottom: 1.25rem;
+            color: #94a3b8;
+            font-size: 0.76rem;
+            line-height: 1.65;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin: 0;
         }
 
-        .pgc-tech-label {
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: var(--sky);
-            font-family: var(--mono);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            margin-bottom: 0.55rem;
-        }
-
+        /* Tags row */
         .pgc-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.45rem;
-            margin-bottom: 1.5rem;
+            gap: 0.3rem;
+            margin-top: 0.45rem;
         }
 
         .pgc-tag {
-            padding: 0.22rem 0.7rem;
+            padding: 0.12rem 0.5rem;
             border-radius: 9999px;
-            font-size: 0.65rem;
+            font-size: 0.58rem;
             font-weight: 600;
             font-family: var(--mono);
             background: rgba(56, 189, 248, 0.07);
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            border: 1px solid rgba(56, 189, 248, 0.22);
             color: var(--sky);
+            white-space: nowrap;
+        }
+
+        /* Right part of info: action buttons */
+        .pgc-info-right {
+            flex-shrink: 0;
         }
 
         .pgc-links {
             display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-            margin-top: auto;
+            flex-direction: column;
+            gap: 0.35rem;
         }
 
         .pgc-link-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.4rem;
-            padding: 0.45rem 1.1rem;
+            gap: 0.35rem;
+            padding: 0.35rem 0.85rem;
             border-radius: 9999px;
-            border: 1px solid rgba(148, 163, 184, 0.3);
+            border: 1px solid rgba(148, 163, 184, 0.28);
             color: var(--muted);
             text-decoration: none;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
             background: rgba(25, 38, 60, 0.5);
-            transition: all 0.3s;
+            transition: all 0.25s;
+            white-space: nowrap;
+            cursor: pointer;
         }
 
         .pgc-link-btn:hover {
@@ -1534,97 +2093,383 @@
             background: rgba(52, 211, 153, 0.14);
         }
 
-        /* Carousel nav row */
-        .proj-carousel-nav {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1.25rem;
-            margin-top: 1.75rem;
+        /* ── READ MORE button ── */
+        .pgc-link-btn.read-more {
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.12), rgba(52, 211, 153, 0.08));
+            border-color: rgba(96, 165, 250, 0.4);
+            color: var(--sky);
         }
 
-        .proj-carousel-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 1px solid rgba(148, 163, 184, 0.3);
-            background: rgba(12, 20, 38, 0.7);
-            backdrop-filter: blur(8px);
-            color: white;
-            font-size: 1.3rem;
-            cursor: pointer;
+        .pgc-link-btn.read-more:hover {
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.22), rgba(52, 211, 153, 0.14));
+            border-color: var(--sky);
+            box-shadow: 0 0 18px rgba(56, 189, 248, 0.2);
+        }
+
+        /* ── PROJECT MODAL OVERLAY ── */
+        .proj-modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(3, 8, 18, 0.85);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+
+        .proj-modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .proj-modal {
+            background: linear-gradient(160deg, rgba(10, 18, 36, 0.98), rgba(14, 26, 50, 0.98));
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 1.25rem;
+            width: 100%;
+            max-width: 860px;
+            max-height: 88vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: relative;
+            transform: translateY(40px) scale(0.97);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            opacity: 0;
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(56, 189, 248, 0.1);
+            scrollbar-width: thin;
+            scrollbar-color: rgba(56, 189, 248, 0.3) transparent;
+        }
+
+        .proj-modal::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .proj-modal::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .proj-modal::-webkit-scrollbar-thumb {
+            background: rgba(56, 189, 248, 0.3);
+            border-radius: 9px;
+        }
+
+        .proj-modal-overlay.open .proj-modal {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        /* Modal hero banner */
+        .pm-hero {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+            background: rgba(5, 10, 22, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
         }
 
-        .proj-carousel-btn:hover {
-            background: rgba(56, 189, 248, 0.15);
+        .pm-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 1rem;
+            display: block;
+        }
+
+        .pm-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to top, rgba(10, 18, 36, 0.98), transparent);
+            pointer-events: none;
+        }
+
+        /* Modal close button */
+        .pm-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            background: rgba(10, 18, 36, 0.8);
+            backdrop-filter: blur(8px);
+            color: white;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.25s;
+        }
+
+        .pm-close:hover {
             border-color: var(--sky);
-            color: var(--sky);
+            background: rgba(56, 189, 248, 0.1);
             transform: scale(1.1);
         }
 
-        .proj-carousel-btn:disabled {
-            opacity: 0.3;
-            cursor: default;
-            transform: none;
+        /* Modal body content */
+        .pm-body {
+            padding: 2rem 2.5rem 2.5rem;
         }
 
-        /* Dots */
-        .proj-carousel-dots {
+        .pm-badge-row {
             display: flex;
-            gap: 0.5rem;
             align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.65rem;
+            flex-wrap: wrap;
         }
 
-        .proj-c-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(148, 163, 184, 0.35);
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .pm-body h2 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
         }
 
-        .proj-c-dot.active {
-            background: var(--sky);
-            width: 22px;
-            border-radius: 4px;
+        .pm-desc {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
         }
 
-        /* Project counter */
-        .proj-carousel-counter {
-            font-family: var(--mono);
-            font-size: 0.78rem;
-            color: var(--muted);
-            min-width: 3.5rem;
-            text-align: center;
+        /* Feature highlights */
+        .pm-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
         }
 
-        .proj-carousel-counter span {
-            color: var(--sky);
+        @media (max-width: 580px) {
+            .pm-features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pm-feat-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            background: rgba(56, 189, 248, 0.04);
+            border: 1px solid rgba(56, 189, 248, 0.12);
+        }
+
+        .pm-feat-item i {
+            color: var(--teal);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .pm-feat-item span {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        /* Image gallery */
+        .pm-gallery-title {
+            font-size: 0.68rem;
             font-weight: 700;
+            color: var(--sky);
+            font-family: var(--mono);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.9rem;
+        }
+
+        .pm-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .pm-gallery-img {
+            border-radius: 0.625rem;
+            overflow: hidden;
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            aspect-ratio: 16/10;
+            background: rgba(5, 10, 20, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: zoom-in;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .pm-gallery-img:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: scale(1.02);
+        }
+
+        .pm-gallery-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 0.4rem;
+            display: block;
+        }
+
+        /* Tech tags in modal */
+        .pm-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-bottom: 1.75rem;
+        }
+
+        /* Modal links */
+        .pm-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .pm-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.55rem 1.25rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: rgba(25, 38, 60, 0.5);
+            transition: all 0.3s;
+        }
+
+        .pm-link-btn:hover {
+            border-color: var(--blue);
+            color: var(--blue);
+            background: rgba(96, 165, 250, 0.1);
+        }
+
+        .pm-link-btn.live {
+            border-color: rgba(52, 211, 153, 0.35);
+            color: var(--teal);
+            background: rgba(52, 211, 153, 0.07);
+        }
+
+        .pm-link-btn.live:hover {
+            background: rgba(52, 211, 153, 0.14);
+        }
+
+        /* Lightbox for gallery images */
+        .pm-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            background: rgba(0, 0, 0, 0.92);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s;
+            padding: 2rem;
+        }
+
+        .pm-lightbox.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .pm-lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.8);
+        }
+
+        .pm-lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pm-lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         @media (max-width: 768px) {
-            .proj-grid-card {
+            .proj-scroll-card {
                 flex-direction: column;
             }
 
             .pgc-img-panel {
-                flex: 0 0 auto;
+                flex: 0 0 55%;
                 max-width: 100%;
                 min-height: unset;
-                height: 210px;
             }
 
             .pgc-body {
-                padding: 1.25rem 1.25rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.65rem;
+                padding: 0.85rem 1rem 1rem;
+            }
+
+            .pgc-info-right {
+                width: 100%;
+            }
+
+            .pgc-links {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .proj-scroll-outer {
+                height: calc(3 * 100vh);
+            }
+
+            .proj-card-stage {
+                height: 540px;
+                padding: 0 1rem;
+            }
+
+            .proj-scroll-card {
+                margin: 0 1rem;
+            }
+
+            .proj-progress-bar {
+                left: 0.5rem;
             }
         }
 
@@ -2138,6 +2983,14 @@
                 margin: 0 auto;
             }
 
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-greeting {
+                margin: 0 auto 1.25rem;
+            }
+
             .hero-photo-wrap {
                 width: 190px;
                 height: 190px;
@@ -2169,7 +3022,6 @@
             }
 
             #skills,
-            #projects,
             #coding-profiles,
             #certifications,
             #contact {
@@ -2216,32 +3068,55 @@
 
     <!-- ══════════════ HERO ══════════════ -->
     <section id="home">
+        <!-- Aurora blobs -->
+        <div class="hero-aurora hero-aurora-1"></div>
+        <div class="hero-aurora hero-aurora-2"></div>
+        <div class="hero-aurora hero-aurora-3"></div>
         <div id="tsparticles-hero"></div>
 
         <div class="hero-content">
             <div class="hero-text">
-                <div class="otw-badge"><span class="otw-dot"></span> Open to Internships &amp; Full-time</div>
-                <h1>Hi, I'm <span class="grad-text">Rasuri Vignesh</span></h1>
+                <h1>
+                    <span
+                        style="color:#64748b;font-size:0.45em;font-weight:500;display:block;letter-spacing:0.12em;margin-bottom:0.4em;font-family:var(--mono)">HELLO,
+                        WORLD! I'M</span>
+                    <span class="hero-name-line">
+                        <span class="hero-name-accent grad-text">Rasuri Vignesh</span>
+                    </span>
+                </h1>
+                <div class="hero-role">
+                    <span class="bracket">[ </span><span class="accent-underline">Full Stack Java Developer</span><span
+                        class="bracket"> ]</span>
+                </div>
                 <p>
-                    <span class="accent-underline">Full Stack Java Developer</span>
-                    — crafting scalable, real-time backends and modern web interfaces.
-                    B.Tech CSE @ Woxsen University | Spring Boot · React · PostgreSQL · AWS.
-                    Passionate about clean architecture, open-source, and competitive programming.
+                    Full Stack Java Developer — crafting scalable, real-time backends and modern web interfaces. B.Tech
+                    CSE @ Woxsen University | Spring Boot · React · PostgreSQL · AWS. Passionate about clean
+                    architecture, open-source, and competitive programming.
                 </p>
-                <div
-                    style="display:flex;gap:0.75rem;margin-top:1.4rem;flex-wrap:wrap;opacity:0;animation:fadeUp 0.5s ease 0.5s forwards;">
+                <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
                     <a href="./Documents/VigneshResume.pdf" target="_blank" class="btn-pill"
-                        style="background:linear-gradient(135deg,rgba(96,165,250,0.2),rgba(52,211,153,0.15));border-color:rgba(96,165,250,0.4);">
+                        style="background:linear-gradient(135deg,rgba(56,189,248,0.18),rgba(52,211,153,0.12));border-color:rgba(56,189,248,0.45);font-size:0.82rem;">
                         <i class='bx bx-download'></i> Resume
                     </a>
-                    <a href="#contact" class="btn-pill">
+                    <a href="#contact" class="btn-pill" style="font-size:0.82rem;">
                         <i class='bx bx-send'></i> Connect
                     </a>
                 </div>
             </div>
 
             <div class="hero-photo-wrap">
-                <img src="./vignesh.jpg" alt="Rasuri Vignesh">
+                <div class="hero-photo-float">
+                    <div class="hero-ring hero-ring-1"></div>
+                    <div class="hero-ring hero-ring-2"></div>
+                    <div class="hero-photo-glow"></div>
+                    <div class="hero-corner tl"></div>
+                    <div class="hero-corner tr"></div>
+                    <div class="hero-corner bl"></div>
+                    <div class="hero-corner br"></div>
+                    <div class="hero-photo-inner">
+                        <img src="./vignesh.jpg" alt="Rasuri Vignesh">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -2389,149 +3264,159 @@
 
 
     <!-- ══════════════ PROJECTS ══════════════ -->
-    <section id="projects" class="reveal">
+    <section id="projects">
         <h2 class="section-heading"><span class="hash">#</span> Projects</h2>
 
-        <div class="proj-carousel" id="proj-carousel">
-            <div class="proj-carousel-viewport">
-                <div class="proj-carousel-track" id="proj-track">
+        <div class="proj-scroll-outer" id="proj-scroll-outer">
+            <div class="proj-sticky-frame" id="proj-sticky-frame">
+
+                <!-- Left progress dots -->
+                <div class="proj-progress-bar" id="proj-prog-bar">
+                    <div class="proj-prog-dot active" data-idx="0"></div>
+                    <div class="proj-prog-dot" data-idx="1"></div>
+                    <div class="proj-prog-dot" data-idx="2"></div>
+                </div>
+
+                <!-- Card stage -->
+                <div class="proj-card-stage">
 
                     <!-- ── QUASAR ── -->
-                    <div class="proj-grid-card">
+                    <div class="proj-scroll-card active" data-card="0">
                         <div class="pgc-img-panel">
-                            <img src="./project-Photos/quasar/Quasar.png" alt="Quasar" draggable="false">
+                            <span class="pgc-num-badge">01 / 03</span>
+                            <img src="./project-Photos/quasar/Quasar.png" alt="Quasar" draggable="false"
+                                onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#0e1e3a,#0a1628)';">
                         </div>
                         <div class="pgc-body">
-                            <div class="pgc-top">
-                                <h3>QUASAR</h3>
-                                <div class="proj-featured-badge"
-                                    style="white-space:nowrap;font-size:0.6rem;flex-shrink:0;"><i class='bx bxs-pin'
-                                        style="font-size:0.65rem;"></i> Flagship</div>
+                            <div class="pgc-info-left">
+                                <div class="pgc-top">
+                                    <h3>QUASAR</h3>
+                                    <div class="proj-featured-badge"
+                                        style="white-space:nowrap;font-size:0.58rem;flex-shrink:0;">
+                                        <i class='bx bxs-pin' style="font-size:0.6rem;"></i> Flagship
+                                    </div>
+                                </div>
+                                <p class="proj-desc">Cloud-based student collaboration platform with pgVector
+                                    recommendations, real-time WebSocket chat, JWT auth and 35+ REST APIs on AWS EC2.
+                                </p>
+                                <div class="pgc-tags">
+                                    <span class="pgc-tag">Java</span>
+                                    <span class="pgc-tag">Spring Boot</span>
+                                    <span class="pgc-tag">React</span>
+                                    <span class="pgc-tag">PostgreSQL</span>
+                                    <span class="pgc-tag">WebSocket</span>
+                                    <span class="pgc-tag">AWS EC2</span>
+                                </div>
                             </div>
-                            <p class="proj-desc">
-                                A cloud-based student collaboration platform — discover projects by skill, form teams,
-                                manage
-                                work. Features pgVector recommendations, real-time WebSocket chat, JWT auth, 35+ REST
-                                APIs on
-                                AWS EC2. OAuth2 authentication, full team invitation workflow, document management, and
-                                timestamped meeting notes. Documented via Swagger.
-                            </p>
-                            <div class="pgc-tech-label">Technologies</div>
-                            <div class="pgc-tags">
-                                <span class="pgc-tag">Java</span>
-                                <span class="pgc-tag">Spring Boot</span>
-                                <span class="pgc-tag">React</span>
-                                <span class="pgc-tag">PostgreSQL</span>
-                                <span class="pgc-tag">WebSocket</span>
-                                <span class="pgc-tag">pgVector</span>
-                                <span class="pgc-tag">AWS EC2</span>
-                                <span class="pgc-tag">JWT</span>
-                            </div>
-                            <div class="pgc-links">
-                                <a href="https://github.com/RasuriVIGNESH/QUASAR" target="_blank" class="pgc-link-btn">
-                                    <i class='bx bxl-github'></i> GitHub
-                                </a>
-                                <a href="https://quasar-8bv.pages.dev/" target="_blank" class="pgc-link-btn live">
-                                    <i class='bx bx-link-external'></i> Live Demo
-                                </a>
-                                <a href="https://quasar-github.onrender.com/swagger-ui/index.html" target="_blank"
-                                    class="pgc-link-btn">
-                                    <i class='bx bx-file'></i> Swagger API
-                                </a>
+                            <div class="pgc-info-right">
+                                <div class="pgc-links">
+                                    <a href="https://quasar-8bv.pages.dev/" target="_blank" class="pgc-link-btn live">
+                                        <i class='bx bx-link-external'></i> Live Demo
+                                    </a>
+                                    <a href="https://github.com/RasuriVIGNESH/QUASAR" target="_blank"
+                                        class="pgc-link-btn">
+                                        <i class='bx bxl-github'></i> GitHub
+                                    </a>
+                                    <button class="pgc-link-btn read-more" onclick="openProjModal('quasar')">
+                                        <i class='bx bx-expand-alt'></i> Read More
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- ── MergeRank ── -->
-                    <div class="proj-grid-card">
+                    <div class="proj-scroll-card" data-card="1">
                         <div class="pgc-img-panel">
-                            <img src="./project-Photos/MergeRank/landingPage.png" alt="MergeRank" draggable="false">
+                            <span class="pgc-num-badge">02 / 03</span>
+                            <img src="./project-Photos/MergeRank/landingPage.png" alt="MergeRank" draggable="false"
+                                onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#0e1e3a,#0a1628)';">
                         </div>
                         <div class="pgc-body">
-                            <div class="pgc-top">
-                                <h3>MergeRank</h3>
+                            <div class="pgc-info-left">
+                                <div class="pgc-top">
+                                    <h3>MergeRank</h3>
+                                </div>
+                                <p class="proj-desc">Competitive programming analytics aggregating LeetCode, GitHub,
+                                    Codeforces &amp; more into one dashboard with AI-powered weak-area detection and
+                                    mentor view.</p>
+                                <div class="pgc-tags">
+                                    <span class="pgc-tag">MongoDB</span>
+                                    <span class="pgc-tag">Express.js</span>
+                                    <span class="pgc-tag">React</span>
+                                    <span class="pgc-tag">Node.js</span>
+                                    <span class="pgc-tag">OpenAI</span>
+                                    <span class="pgc-tag">JWT</span>
+                                </div>
                             </div>
-                            <p class="proj-desc">
-                                Competitive programming analytics platform aggregating LeetCode, GitHub, Codeforces,
-                                CodeChef &amp;
-                                HackerRank into one dashboard with batch-scoped leaderboards and AI-powered weak-area
-                                detection.
-                                Mentors get a class-wide view with placement readiness scores, inactivity alerts, and
-                                CSV
-                                exports. AI engine recommends next problems based on each student's solve history.
-                            </p>
-                            <div class="pgc-tech-label">Technologies</div>
-                            <div class="pgc-tags">
-                                <span class="pgc-tag">MongoDB</span>
-                                <span class="pgc-tag">Express.js</span>
-                                <span class="pgc-tag">React</span>
-                                <span class="pgc-tag">Node.js</span>
-                                <span class="pgc-tag">OpenAI</span>
-                                <span class="pgc-tag">JWT</span>
-                                <span class="pgc-tag">REST APIs</span>
-                            </div>
-                            <div class="pgc-links">
-                                <a href="https://github.com/RasuriVIGNESH/MergeRank" target="_blank"
-                                    class="pgc-link-btn">
-                                    <i class='bx bxl-github'></i> GitHub
-                                </a>
-                                <a href="https://mergerank.pages.dev/" target="_blank" class="pgc-link-btn live">
-                                    <i class='bx bx-link-external'></i> Live Demo
-                                </a>
+                            <div class="pgc-info-right">
+                                <div class="pgc-links">
+                                    <a href="https://mergerank.pages.dev/" target="_blank" class="pgc-link-btn live">
+                                        <i class='bx bx-link-external'></i> Live Demo
+                                    </a>
+                                    <a href="https://github.com/RasuriVIGNESH/MergeRank" target="_blank"
+                                        class="pgc-link-btn">
+                                        <i class='bx bxl-github'></i> GitHub
+                                    </a>
+                                    <button class="pgc-link-btn read-more" onclick="openProjModal('mergerank')">
+                                        <i class='bx bx-expand-alt'></i> Read More
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- ── SEWA ── -->
-                    <div class="proj-grid-card">
-                        <div class="pgc-img-panel">
-                            <img src="./project-Photos/sewa/hospital.png" alt="SEWA" draggable="false">
+                    <div class="proj-scroll-card" data-card="2">
+                        <div class="pgc-img-panel" id="sewa-img-panel">
+                            <span class="pgc-num-badge">03 / 03</span>
+                            <img src="./project-Photos/sewa/hospital.png" alt="SEWA — Sepsis Early Warning Agent"
+                                draggable="false"
+                                onerror="this.src='https://raw.githubusercontent.com/RasuriVIGNESH/SEWA/main/hospital.png';this.onerror=function(){this.style.display='none';};">
                         </div>
                         <div class="pgc-body">
-                            <div class="pgc-top">
-                                <h3>SEWA</h3>
+                            <div class="pgc-info-left">
+                                <div class="pgc-top">
+                                    <h3>SEWA</h3>
+                                </div>
+                                <p class="proj-desc">Sepsis Early Warning Agent — real-time ICU clinical
+                                    decision-support using LSTM + XGBoost risk models with SIRS/qSOFA screening and
+                                    auditable alerts.</p>
+                                <div class="pgc-tags">
+                                    <span class="pgc-tag">Python</span>
+                                    <span class="pgc-tag">FastAPI</span>
+                                    <span class="pgc-tag">PostgreSQL</span>
+                                    <span class="pgc-tag">LSTM</span>
+                                    <span class="pgc-tag">XGBoost</span>
+                                    <span class="pgc-tag">ML</span>
+                                </div>
                             </div>
-                            <p class="proj-desc">
-                                Sepsis Early Warning Agent — real-time clinical decision-support for ICUs. Monitors
-                                patient
-                                vitals continuously and intermittent lab results, applies SIRS/qSOFA rule-based
-                                screening and an
-                                ML risk model (LSTM + XGBoost) to deliver explainable, auditable alerts to clinical
-                                staff —
-                                enabling earlier intervention and reducing sepsis mortality.
-                            </p>
-                            <div class="pgc-tech-label">Technologies</div>
-                            <div class="pgc-tags">
-                                <span class="pgc-tag">Python</span>
-                                <span class="pgc-tag">FastAPI</span>
-                                <span class="pgc-tag">PostgreSQL</span>
-                                <span class="pgc-tag">LSTM</span>
-                                <span class="pgc-tag">XGBoost</span>
-                                <span class="pgc-tag">ML</span>
-                            </div>
-                            <div class="pgc-links">
-                                <a href="https://github.com/RasuriVIGNESH/SEWA" target="_blank" class="pgc-link-btn">
-                                    <i class='bx bxl-github'></i> GitHub
-                                </a>
+                            <div class="pgc-info-right">
+                                <div class="pgc-links">
+                                    <a href="https://github.com/RasuriVIGNESH/SEWA" target="_blank"
+                                        class="pgc-link-btn">
+                                        <i class='bx bxl-github'></i> GitHub
+                                    </a>
+                                    <button class="pgc-link-btn read-more" onclick="openProjModal('sewa')">
+                                        <i class='bx bx-expand-alt'></i> Read More
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                </div><!-- /track -->
-            </div><!-- /viewport -->
+                </div><!-- /card-stage -->
 
-            <!-- Nav: prev · dots · counter · next -->
-            <div class="proj-carousel-nav">
-                <button class="proj-carousel-btn" id="proj-prev" aria-label="Previous project">
-                    <i class='bx bx-chevron-left'></i>
-                </button>
-                <div class="proj-carousel-dots" id="proj-dots"></div>
-                <div class="proj-carousel-counter" id="proj-counter"><span>1</span> / 3</div>
-                <button class="proj-carousel-btn" id="proj-next" aria-label="Next project">
-                    <i class='bx bx-chevron-right'></i>
-                </button>
-            </div>
-        </div>
+                <!-- Counter -->
+                <div class="proj-scroll-counter"><span id="proj-cur">1</span> / 3</div>
+
+                <!-- Scroll hint -->
+                <div class="proj-scroll-hint">
+                    <i class='bx bx-mouse'></i> scroll to explore
+                </div>
+
+            </div><!-- /sticky-frame -->
+        </div><!-- /scroll-outer -->
     </section>
 
 
@@ -2792,59 +3677,95 @@
             });
         }
 
-        /* ─── PROJECT CAROUSEL ─── */
+        /* ─── PROJECTS — SCROLL-DRIVEN (cinematic sweep) ─── */
         (function () {
-            const track = document.getElementById('proj-track');
-            const prevBtn = document.getElementById('proj-prev');
-            const nextBtn = document.getElementById('proj-next');
-            const dotsWrap = document.getElementById('proj-dots');
-            const counter = document.getElementById('proj-counter');
-
-            if (!track) return;
-
-            const cards = Array.from(track.children);
-            const total = cards.length;
+            const outer = document.getElementById('proj-scroll-outer');
+            const cards = document.querySelectorAll('.proj-scroll-card');
+            const dots = document.querySelectorAll('.proj-prog-dot');
+            const curEl = document.getElementById('proj-cur');
+            const TOTAL = cards.length;
             let current = 0;
+            let lastScrollY = window.scrollY;
+            let locked = false;
+            const DURATION = 800; // ms — must be >= longest transition
 
-            // Build dots
-            const dots = cards.map((_, i) => {
-                const d = document.createElement('button');
-                d.className = 'proj-c-dot' + (i === 0 ? ' active' : '');
-                d.setAttribute('aria-label', 'Go to project ' + (i + 1));
-                d.addEventListener('click', () => goTo(i));
-                dotsWrap.appendChild(d);
-                return d;
-            });
+            function activate(idx, forward) {
+                if (locked) return;
+                if (idx === current && cards[idx].classList.contains('active')) return;
+                locked = true;
 
-            function goTo(idx) {
-                current = ((idx % total) + total) % total;
-                track.style.transform = `translateX(-${current * 100}%)`;
+                const outgoing = cards[current];
+                const incoming = cards[idx];
+
+                // 1 — tag outgoing with direction-aware exit class
+                outgoing.classList.remove('active');
+                outgoing.classList.add(forward ? 'exit-forward' : 'exit-backward');
+
+                // 2 — position incoming off-screen (opposite side), no transition
+                incoming.style.transition = 'none';
+                incoming.style.opacity = '0';
+                if (forward) {
+                    // will enter from bottom-right
+                    incoming.style.transform = 'translateY(60px) translateX(30px) scale(0.93) rotate(1.5deg)';
+                    incoming.style.filter = 'blur(14px)';
+                    incoming.style.clipPath = 'inset(0% 0% 0% 100% round 1.5rem)';
+                } else {
+                    // will enter from top-left
+                    incoming.style.transform = 'translateY(-60px) translateX(-30px) scale(0.93) rotate(-1.5deg)';
+                    incoming.style.filter = 'blur(14px)';
+                    incoming.style.clipPath = 'inset(0% 100% 0% 0% round 1.5rem)';
+                }
+
+                // 3 — force reflow so the instant-set above paints before transition
+                incoming.getBoundingClientRect();
+
+                // 4 — clear inline overrides, let CSS class drive the animation in
+                incoming.style.transition = '';
+                incoming.style.transform = '';
+                incoming.style.filter = '';
+                incoming.style.clipPath = '';
+                incoming.style.opacity = '';
+                incoming.classList.add('active');
+
+                // 5 — update state immediately
+                current = idx;
                 dots.forEach((d, i) => d.classList.toggle('active', i === current));
-                counter.innerHTML = `<span>${current + 1}</span> / ${total}`;
-                prevBtn.disabled = current === 0;
-                nextBtn.disabled = current === total - 1;
+                if (curEl) curEl.textContent = current + 1;
+
+                // 6 — clean up exit class and unlock after transition finishes
+                setTimeout(() => {
+                    outgoing.classList.remove('exit-forward', 'exit-backward');
+                    locked = false;
+                }, DURATION);
             }
 
-            prevBtn.addEventListener('click', () => goTo(current - 1));
-            nextBtn.addEventListener('click', () => goTo(current + 1));
-
-            // Swipe support
-            let touchStartX = 0;
-            track.parentElement.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-            track.parentElement.addEventListener('touchend', e => {
-                const dx = e.changedTouches[0].clientX - touchStartX;
-                if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1);
-            }, { passive: true });
-
-            // Keyboard arrows (only when projects section is in view)
-            document.addEventListener('keydown', e => {
-                const sec = document.getElementById('projects');
-                if (!sec || !sec.classList.contains('visible')) return;
-                if (e.key === 'ArrowRight') goTo(current + 1);
-                if (e.key === 'ArrowLeft') goTo(current - 1);
+            // Dot clicks scroll to the right position
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const idx = parseInt(dot.dataset.idx);
+                    if (!outer) return;
+                    const step = outer.offsetHeight / TOTAL;
+                    window.scrollTo({ top: outer.offsetTop + step * idx + 2, behavior: 'smooth' });
+                });
             });
 
-            goTo(0); // init state
+            // Scroll driver
+            function onScroll() {
+                if (!outer) return;
+                const currentY = window.scrollY;
+                const goingDown = currentY >= lastScrollY;
+                lastScrollY = currentY;
+
+                const scrolled = -outer.getBoundingClientRect().top;
+                if (scrolled < 0 || scrolled > outer.offsetHeight) return;
+
+                const step = outer.offsetHeight / TOTAL;
+                const idx = Math.min(TOTAL - 1, Math.floor(scrolled / step));
+                if (idx !== current) activate(idx, goingDown);
+            }
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
         })();
 
         /* ─── GITHUB 6-MONTH CONTRIBUTION CALENDAR ─── */
@@ -2856,22 +3777,33 @@
                 detectRetina: true,
                 fpsLimit: 60,
                 particles: {
-                    color: { value: '#ffffff' },
+                    color: { value: ['#38bdf8', '#818cf8', '#34d399', '#ffffff'] },
                     move: {
-                        direction: 'left',
                         enable: true,
                         outModes: { default: 'out' },
                         random: true,
-                        speed: { min: 0.3, max: 0.8 },
-                        straight: false
+                        speed: { min: 0.2, max: 0.6 },
+                        straight: false,
+                        direction: 'none'
                     },
-                    number: { density: { enable: true }, value: 80 },
+                    number: { density: { enable: true }, value: 55 },
                     opacity: {
-                        value: { min: 0.25, max: 0.75 },
-                        animation: { enable: true, speed: 0.5, sync: false, mode: 'auto' }
+                        value: { min: 0.1, max: 0.5 },
+                        animation: { enable: true, speed: 0.4, sync: false, mode: 'auto' }
                     },
                     shape: { type: 'circle' },
-                    size: { value: { min: 1, max: 3 } }
+                    size: { value: { min: 0.5, max: 2.5 } },
+                    links: {
+                        enable: true,
+                        distance: 160,
+                        color: '#38bdf8',
+                        opacity: 0.06,
+                        width: 1
+                    }
+                },
+                interactivity: {
+                    events: { onHover: { enable: true, mode: 'grab' } },
+                    modes: { grab: { distance: 140, links: { opacity: 0.15 } } }
                 },
                 pauseOnBlur: true
             });
@@ -3168,7 +4100,180 @@
                 });
             });
         })();
+
+        /* ─── PROJECT MODALS ─── */
+        const PROJECT_DATA = {
+            quasar: {
+                title: 'QUASAR',
+                badge: { text: 'Flagship Project', icon: 'bxs-pin' },
+                heroImg: './project-Photos/quasar/Quasar.png',
+                desc: `QUASAR is a cloud-based student collaboration platform designed to bridge the gap between students 
+                       who have ideas and those who have the skills. Students can discover projects by tech stack, form 
+                       teams, manage workflows, and communicate in real-time — all in one place. Built with a production-grade 
+                       Spring Boot microservices backend, deployed on AWS EC2, with a modern React frontend.`,
+                features: [
+                    { icon: 'bx-bot', text: 'pgVector semantic recommendations to match students with relevant projects' },
+                    { icon: 'bx-chat', text: 'Real-time WebSocket/STOMP chat with persistent message history' },
+                    { icon: 'bx-lock-alt', text: 'OAuth2 + JWT authentication with full team invitation workflows' },
+                    { icon: 'bx-file', text: 'Document management, timestamped meeting notes, Swagger-documented APIs' },
+                    { icon: 'bx-cloud', text: 'Deployed on AWS EC2 with 35+ REST APIs' },
+                    { icon: 'bx-data', text: 'PostgreSQL with pgVector extension for AI-powered discovery' },
+                ],
+                tags: ['Java', 'Spring Boot', 'React', 'PostgreSQL', 'WebSocket', 'pgVector', 'AWS EC2', 'JWT', 'Kafka', 'Docker'],
+                gallery: [
+                    { src: './project-Photos/quasar/Quasar.png', caption: 'Landing Page' },
+                    // Add more images here: { src: './project-Photos/quasar/dashboard.png', caption: 'Dashboard' }
+                ],
+                links: [
+                    { href: 'https://github.com/RasuriVIGNESH/QUASAR', icon: 'bxl-github', label: 'GitHub', cls: '' },
+                    { href: 'https://quasar-8bv.pages.dev/', icon: 'bx-link-external', label: 'Live Demo', cls: 'live' },
+                    { href: 'https://quasar-github.onrender.com/swagger-ui/index.html', icon: 'bx-file', label: 'Swagger API', cls: '' },
+                ]
+            },
+            mergerank: {
+                title: 'MergeRank',
+                heroImg: './project-Photos/MergeRank/landingPage.png',
+                desc: `MergeRank is a competitive programming analytics platform that aggregates data from 
+                       LeetCode, GitHub, Codeforces, CodeChef & HackerRank into a single unified dashboard. 
+                       It provides batch-scoped leaderboards, AI-powered weak-area detection, and a mentor view 
+                       for tracking placement readiness across a class.`,
+                features: [
+                    { icon: 'bx-trophy', text: 'Unified leaderboard aggregating 5 competitive programming platforms' },
+                    { icon: 'bx-brain', text: 'AI engine powered by OpenAI recommends next problems based on solve history' },
+                    { icon: 'bx-group', text: 'Mentor dashboard with class-wide placement readiness scores' },
+                    { icon: 'bx-bell', text: 'Inactivity alerts and CSV exports for mentors' },
+                    { icon: 'bx-chart', text: 'Visual analytics showing solved problem distribution and trends' },
+                    { icon: 'bx-shield', text: 'JWT-based authentication with role-based access (student / mentor)' },
+                ],
+                tags: ['MongoDB', 'Express.js', 'React', 'Node.js', 'OpenAI', 'JWT', 'REST APIs'],
+                gallery: [
+                    { src: './project-Photos/MergeRank/landingPage.png', caption: 'Landing Page' },
+                    // Add: { src: './project-Photos/MergeRank/dashboard.png', caption: 'Dashboard' }
+                ],
+                links: [
+                    { href: 'https://github.com/RasuriVIGNESH/MergeRank', icon: 'bxl-github', label: 'GitHub', cls: '' },
+                    { href: 'https://mergerank.pages.dev/', icon: 'bx-link-external', label: 'Live Demo', cls: 'live' },
+                ]
+            },
+            sewa: {
+                title: 'SEWA',
+                heroImg: './project-Photos/sewa/hospital.png',
+                desc: `SEWA (Sepsis Early Warning Agent) is a real-time clinical decision-support system designed 
+                       for ICUs. It continuously monitors patient vitals and lab results, applying SIRS/qSOFA 
+                       rule-based screening alongside an ML risk model (LSTM + XGBoost) to deliver explainable, 
+                       auditable alerts to clinical staff — enabling earlier intervention and reducing sepsis mortality.`,
+                features: [
+                    { icon: 'bx-pulse', text: 'Real-time vitals monitoring with continuous SIRS/qSOFA screening' },
+                    { icon: 'bx-chip', text: 'LSTM + XGBoost ensemble model for sepsis risk prediction' },
+                    { icon: 'bx-bell', text: 'Auditable, explainable alerts with confidence scores for clinicians' },
+                    { icon: 'bx-data', text: 'FastAPI backend with PostgreSQL for high-throughput patient data ingestion' },
+                    { icon: 'bx-bar-chart', text: 'Pandas/NumPy analytics pipeline for lab result trend analysis' },
+                    { icon: 'bx-shield-alt-2', text: 'Designed for ICU-grade reliability with full audit logging' },
+                ],
+                tags: ['Python', 'FastAPI', 'PostgreSQL', 'LSTM', 'XGBoost', 'Pandas', 'NumPy', 'ML'],
+                gallery: [
+                    { src: './project-Photos/sewa/hospital.png', caption: 'Hospital Overview' },
+                    { src: './project-Photos/sewa/doctorDashboard.png', caption: 'Doctor Dashboard' },
+                    { src: './project-Photos/sewa/systemDesign.png', caption: 'System Design' },
+                ],
+                links: [
+                    { href: 'https://github.com/RasuriVIGNESH/SEWA', icon: 'bxl-github', label: 'GitHub', cls: '' },
+                ]
+            }
+        };
+
+        function openProjModal(key) {
+            const d = PROJECT_DATA[key];
+            if (!d) return;
+
+            const featuresHTML = (d.features || []).map(f =>
+                `<div class="pm-feat-item"><i class='bx ${f.icon}'></i><span>${f.text}</span></div>`
+            ).join('');
+
+            const tagsHTML = (d.tags || []).map(t =>
+                `<span class="pgc-tag">${t}</span>`
+            ).join('');
+
+            const galleryHTML = (d.gallery && d.gallery.length > 0)
+                ? `<div class="pm-gallery-title"><i class='bx bx-images'></i> &nbsp;Screenshots</div>
+                   <div class="pm-gallery">
+                   ${d.gallery.map(g => `<div class="pm-gallery-img" onclick="openLightbox('${g.src}')" title="${g.caption}">
+                       <img src="${g.src}" alt="${g.caption}" loading="lazy" onerror="this.parentElement.style.display='none'">
+                   </div>`).join('')}
+                   </div>` : '';
+
+            const linksHTML = (d.links || []).map(l =>
+                `<a href="${l.href}" target="_blank" class="pm-link-btn ${l.cls}">
+                    <i class='bx ${l.icon}'></i> ${l.label}
+                </a>`
+            ).join('');
+
+            const badgeHTML = d.badge
+                ? `<div class="proj-featured-badge"><i class='bx ${d.badge.icon}' style="font-size:0.65rem;"></i> ${d.badge.text}</div>`
+                : '';
+
+            document.getElementById('pm-content').innerHTML = `
+                <div class="pm-hero">
+                    <img src="${d.heroImg}" alt="${d.title}" onerror="this.style.display='none'">
+                </div>
+                <div class="pm-body">
+                    <div class="pm-badge-row">${badgeHTML}</div>
+                    <h2>${d.title}</h2>
+                    <p class="pm-desc">${d.desc}</p>
+                    ${featuresHTML ? `<div class="pm-features">${featuresHTML}</div>` : ''}
+                    ${galleryHTML}
+                    <div class="pm-gallery-title" style="margin-bottom:0.65rem;"><i class='bx bx-code-alt'></i> &nbsp;Technologies</div>
+                    <div class="pm-tags">${tagsHTML}</div>
+                    <div class="pm-links">${linksHTML}</div>
+                </div>
+            `;
+
+            const overlay = document.getElementById('proj-modal-overlay');
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjModal() {
+            document.getElementById('proj-modal-overlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function closeProjModalOnOverlay(e) {
+            if (e.target === document.getElementById('proj-modal-overlay')) closeProjModal();
+        }
+
+        function openLightbox(src) {
+            document.getElementById('pm-lightbox-img').src = src;
+            document.getElementById('pm-lightbox').classList.add('open');
+        }
+
+        function closeLightbox() {
+            document.getElementById('pm-lightbox').classList.remove('open');
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') { closeProjModal(); closeLightbox(); }
+        });
+
     </script>
+
+    <!-- ══════════════ PROJECT MODAL ══════════════ -->
+    <div class="proj-modal-overlay" id="proj-modal-overlay" onclick="closeProjModalOnOverlay(event)">
+        <div class="proj-modal" id="proj-modal">
+            <button class="pm-close" onclick="closeProjModal()" aria-label="Close">
+                <i class='bx bx-x'></i>
+            </button>
+            <!-- Dynamic content injected by JS -->
+            <div id="pm-content"></div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="pm-lightbox" id="pm-lightbox" onclick="closeLightbox()">
+        <button class="pm-lightbox-close"><i class='bx bx-x'></i></button>
+        <img id="pm-lightbox-img" src="" alt="Project screenshot">
+    </div>
+
 
 </body>
 
