@@ -1246,6 +1246,452 @@
                 height: 36px;
             }
         }
+
+        /* ===== MOBILE: PROJECT SLIDE IMPROVEMENTS ===== */
+        @media (max-width: 768px) {
+            #projects {
+                justify-content: flex-start;
+                padding-top: 0;
+            }
+
+            .projects-title {
+                position: relative;
+                top: auto;
+                padding: 1.2rem 1.2rem 0.5rem;
+                font-size: 0.9rem;
+                letter-spacing: 10px;
+                text-align: center;
+                width: 100%;
+            }
+
+            .projects-track {
+                flex: 1;
+                height: auto;
+            }
+
+            .project-slide {
+                padding: 1rem 1.2rem 1.5rem;
+                height: auto;
+                min-height: calc(100vh - 60px);
+                justify-content: flex-start;
+                padding-top: 1.5rem;
+                gap: 1rem;
+            }
+
+            .project-slide img.hero-img {
+                height: 10rem;
+                width: 100%;
+                object-fit: contain;
+                border-radius: 0.75rem;
+            }
+
+            .project-info {
+                gap: 0.85rem;
+                width: 100%;
+            }
+
+            .project-info h4 {
+                font-size: 1.1rem;
+            }
+
+            .project-header {
+                gap: 0.75rem !important;
+            }
+
+            .tech-icons {
+                gap: 0.4rem;
+                flex-wrap: wrap;
+            }
+
+            .tech-icons i {
+                font-size: 1.5rem !important;
+            }
+
+            .project-summary {
+                font-size: 0.82rem;
+                line-height: 1.65;
+                text-align: left;
+                display: -webkit-box;
+                -webkit-line-clamp: 5;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .btn-outline {
+                font-size: 0.72rem;
+                padding: 0.35rem 0.85rem;
+            }
+
+            /* Swipe hint dots */
+            .swipe-hint {
+                display: flex !important;
+            }
+        }
+
+        /* Swipe hint dots (mobile nav indicator) */
+        .swipe-hint {
+            display: none;
+            gap: 6px;
+            justify-content: center;
+            align-items: center;
+            padding-bottom: 0.5rem;
+        }
+
+        .swipe-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .swipe-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        /* ===== READ MORE BUTTON ===== */
+        .read-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-family: var(--mono);
+            font-size: 0.78rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0;
+            letter-spacing: 0.05em;
+            transition: gap 0.2s;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            transition: all 0.2s;
+        }
+
+        .read-more-btn:hover {
+            text-decoration-color: var(--accent-light);
+            gap: 0.6rem;
+        }
+
+        .read-more-btn svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.2s;
+        }
+
+        .read-more-btn:hover svg {
+            transform: translateX(3px);
+        }
+
+        /* ===== PROJECT DETAIL DRAWER / MODAL ===== */
+        .proj-drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+
+        .proj-drawer-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .proj-drawer {
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: min(560px, 95vw);
+            background: var(--bg2);
+            z-index: 2001;
+            transform: translateX(100%);
+            transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -12px 0 40px rgba(0, 0, 0, 0.12);
+            border-left: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .proj-drawer.open {
+            transform: translateX(0);
+        }
+
+        .proj-drawer__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.4rem 1.6rem;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .proj-drawer__title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.04em;
+        }
+
+        .proj-drawer__close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--muted);
+            font-size: 1.2rem;
+            transition: all 0.2s;
+        }
+
+        .proj-drawer__close:hover {
+            background: rgba(44, 105, 117, 0.08);
+            color: var(--accent);
+            border-color: var(--accent-light);
+        }
+
+        .proj-drawer__body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.6rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .proj-drawer__body::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .proj-drawer__body::-webkit-scrollbar-thumb {
+            background: rgba(44, 105, 117, 0.3);
+            border-radius: 9999px;
+        }
+
+        /* --- New Styles for Image Overlay Layout --- */
+        .image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            /* Centers the image wrapper */
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        /* Wraps the image tightly so the name stays pinned to the diagram edge */
+        .image-tight-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .overlay-name {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 0.2rem 0.8rem;
+            border-radius: 4px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .overlay-name h4 {
+            margin: 0;
+            font-size: 1.4rem !important;
+            font-weight: 800;
+            color: var(--accent);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-color: var(--accent-light);
+        }
+
+        .project-meta-footer {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .tech-stack-reveal {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .tech-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .tech-item i {
+            font-size: 2rem;
+            cursor: help;
+            transition: transform 0.2s;
+        }
+
+        /* Tooltip appearing ABOVE the icon */
+        .tech-label {
+            position: absolute;
+            bottom: 140%;
+            left: 50%;
+            transform: translateX(-50%) translateY(5px);
+            background: #111;
+            color: #fff;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-family: var(--mono);
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            pointer-events: none;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .tech-item:hover .tech-label {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .tech-item:hover i {
+            transform: scale(1.15);
+        }
+
+        @media (max-width: 768px) {
+            .project-meta-footer {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .overlay-name {
+                top: 5px;
+                left: 5px;
+            }
+
+            .overlay-name h4 {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        /* Gallery grid inside drawer */
+        .drawer-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .drawer-gallery img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s;
+        }
+
+        .drawer-gallery img:hover {
+            transform: scale(1.02);
+        }
+
+        .drawer-gallery img.full-width {
+            grid-column: 1 / -1;
+            aspect-ratio: 16/8;
+        }
+
+        /* Section headers inside drawer */
+        .drawer-section-title {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.6rem;
+        }
+
+        .drawer-text {
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.75;
+        }
+
+        .drawer-feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .drawer-feature-list li {
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .drawer-feature-list li::before {
+            content: '▸';
+            color: var(--accent-light);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .drawer-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .drawer-tag {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            padding: 0.25rem 0.8rem;
+            background: rgba(44, 105, 117, 0.08);
+            border-radius: 30px;
+            color: var(--accent);
+            border: 1px solid rgba(44, 105, 117, 0.15);
+        }
+
+        .drawer-links {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 480px) {
+            .proj-drawer {
+                width: 100vw;
+                border-left: none;
+            }
+
+            .drawer-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .drawer-gallery img.full-width {
+                grid-column: 1;
+            }
+        }
     </style>
     <script src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/github-calendar@latest/dist/github-calendar-responsive.css" />
@@ -1388,18 +1834,81 @@
 
     <!-- PROJECTS: full screen, horizontal snap (Mitchell Sparrow Style) -->
     <section id="projects">
-        <h3 class="projects-title">Projects</h3>
+        <!-- <h3 class="projects-title">Projects</h3> -->
 
-        <div class="projects-track">
-            <!-- Project 1: QUASAR -->
+        <div class="projects-track" id="projectsTrack">
+            <!-- SEWA PROJECT SLIDE -->
+            <div class="project-slide">
+                <!-- Image Section with Name Overlay -->
+                <div class="image-container">
+                    <img src="./project-Photos/SEWA/icu_system_design2.png" alt="SEWA" class="hero-img">
+                    <div class="overlay-name">
+                        <h4>SEWA</h4>
+                    </div>
+                </div>
+
+                <!-- Info Section -->
+                <div class="project-info">
+                    <p class="project-summary">
+                        Sepsis Early Warning Agent — real-time ICU decision-support using LSTM +
+                        XGBoost risk models with SIRS/qSOFA screening and auditable alerts. Developed to assist
+                        healthcare professionals in early detection and intervention for critical patient conditions.
+                    </p>
+
+                    <!-- New Meta Footer: Tech + Github -->
+                    <div class="project-meta-footer">
+                        <div class="tech-stack-reveal">
+                            <!-- Spring Boot -->
+                            <div class="tech-item">
+                                <i class="devicon-spring-original colored"></i>
+                                <span class="tech-label">Spring Boot (Core Backend)</span>
+                            </div>
+                            <!-- React -->
+                            <div class="tech-item">
+                                <i class="devicon-react-original colored"></i>
+                                <span class="tech-label">React (Client Dashboard)</span>
+                            </div>
+                            <!-- Python -->
+                            <div class="tech-item">
+                                <i class="devicon-python-plain colored"></i>
+                                <span class="tech-label">Python (ML Sepsis Detection)</span>
+                            </div>
+                            <!-- Postgres -->
+                            <div class="tech-item">
+                                <i class="devicon-postgresql-plain colored"></i>
+                                <span class="tech-label">PostgreSQL (Database)</span>
+                            </div>
+                            <!-- FHIR -->
+                            <div class="tech-item">
+                                <i class='bx bx-pulse' style="color: #d12d2d; font-size: 2rem;"></i>
+                                <span class="tech-label">FHIR Server (ICU Data Link)</span>
+                            </div>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/RasuriVIGNESH/SEWA" target="_blank" class="btn-outline">
+                                <i class='bx bxl-github'></i> View GitHub
+                            </a>
+                        </div>
+                    </div>
+
+                    <button class="read-more-btn" onclick="openDrawer('sewa')"
+                        style="margin-top: 1rem; align-self: center;">
+                        Read more
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 8h10M9 4l4 4-4 4" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- QUASAR -->
             <div class="project-slide">
                 <img src="./project-Photos/quasar/Quasar.png" alt="QUASAR" class="hero-img">
-
                 <div class="project-info">
-                    <!-- Flex container to align title and links -->
                     <div class="project-header"
                         style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-                        <h4 style="margin: 0;"><span class="underline">Project 1:</span> QUASAR</h4>
+                        <h4 style="margin: 0;">QUASAR</h4>
                         <div class="project-links" style="display: flex; gap: 0.5rem;">
                             <a href="https://quasar-8bv.pages.dev/" target="_blank" class="btn-outline"
                                 style="padding: 0.4rem 1rem; font-size: 0.75rem;">Live Demo</a>
@@ -1407,7 +1916,6 @@
                                 style="padding: 0.4rem 1rem; font-size: 0.75rem;">GitHub</a>
                         </div>
                     </div>
-
                     <div class="tech-icons">
                         <i class="devicon-java-plain colored" style="font-size: 2rem;"></i>
                         <i class="devicon-spring-original colored" style="font-size: 2rem;"></i>
@@ -1421,16 +1929,22 @@
                         includes real-time chat, task management, authentication, and project collaboration features,
                         and was built using Spring Boot, React, PostgreSQL, WebSockets, and a Python-based
                         recommendation engine.</p>
+                    <button class="read-more-btn" onclick="openDrawer('quasar')">
+                        Read more
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 8h10M9 4l4 4-4 4" />
+                        </svg>
+                    </button>
                 </div>
             </div>
 
-            <!-- Project 2: MergeRank -->
+            <!-- MergeRank -->
             <div class="project-slide">
                 <img src="./project-Photos/MergeRank/landingPage.png" alt="MergeRank" class="hero-img">
                 <div class="project-info">
                     <div class="project-header"
                         style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-                        <h4 style="margin: 0;"><span class="underline">Project 2:</span> MergeRank</h4>
+                        <h4 style="margin: 0;">MergeRank</h4>
                         <div class="project-links" style="display: flex; gap: 0.5rem;">
                             <a href="https://mergerank.pages.dev/" target="_blank" class="btn-outline"
                                 style="padding: 0.4rem 1rem; font-size: 0.75rem;">Live Demo</a>
@@ -1438,7 +1952,6 @@
                                 style="padding: 0.4rem 1rem; font-size: 0.75rem;">GitHub</a>
                         </div>
                     </div>
-
                     <div class="tech-icons">
                         <i class="devicon-mongodb-plain colored" style="font-size: 2rem;"></i>
                         <i class="devicon-express-original colored" style="font-size: 2rem;"></i>
@@ -1449,39 +1962,37 @@
                         Codeforces & more into one dashboard with AI-powered weak-area detection and mentor view. This
                         project aims to help developers track their progress across multiple platforms in a single,
                         unified interface.</p>
-                </div>
-            </div>
-
-            <!-- Project 3: SEWA -->
-            <div class="project-slide">
-                <img src="./project-Photos/sewa/hospital.png" alt="SEWA" class="hero-img">
-                <div class="project-info">
-                    <div class="project-header"
-                        style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
-                        <h4 style="margin: 0;"><span class="underline">Project 3:</span> SEWA</h4>
-                        <div class="project-links" style="display: flex; gap: 0.5rem;">
-                            <!-- <a href="https://sewa-live-demo.example.com" target="_blank" class="btn-outline"
-                                style="padding: 0.4rem 1rem; font-size: 0.75rem;">Live Demo</a> -->
-                            <a href="https://github.com/RasuriVIGNESH/SEWA" target="_blank" class="btn-outline"
-                                style="padding: 0.4rem 1rem; font-size: 0.75rem;">GitHub</a>
-                        </div>
-                    </div>
-
-                    <div class="tech-icons">
-                        <i class="devicon-python-plain colored" style="font-size: 2rem;"></i>
-                        <i class="devicon-fastapi-plain colored" style="font-size: 2rem;"></i>
-                        <i class="devicon-postgresql-plain colored" style="font-size: 2rem;"></i>
-                    </div>
-                    <p class="project-summary">Sepsis Early Warning Agent — real-time ICU decision-support using LSTM +
-                        XGBoost risk models with SIRS/qSOFA screening and auditable alerts. Developed to assist
-                        healthcare professionals in early detection and intervention for critical patient conditions.
-                    </p>
+                    <button class="read-more-btn" onclick="openDrawer('mergerank')">
+                        Read more
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 8h10M9 4l4 4-4 4" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
 
+        <!-- Mobile swipe dots -->
+        <div class="swipe-hint" id="swipeDots">
+            <div class="swipe-dot active" data-idx="0"></div>
+            <div class="swipe-dot" data-idx="1"></div>
+            <div class="swipe-dot" data-idx="2"></div>
+        </div>
+
         <div class="skew-background"></div>
     </section>
+
+    <!-- ===== PROJECT DETAIL DRAWER ===== -->
+    <div class="proj-drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+    <div class="proj-drawer" id="projDrawer">
+        <div class="proj-drawer__header">
+            <span class="proj-drawer__title" id="drawerTitle">Project</span>
+            <button class="proj-drawer__close" onclick="closeDrawer()" aria-label="Close">&#x2715;</button>
+        </div>
+        <div class="proj-drawer__body" id="drawerBody">
+            <!-- Filled dynamically -->
+        </div>
+    </div>
 
     <!-- CODING PROFILES & GITHUB CALENDAR (shortened for brevity) -->
     <section id="coding-profiles" class="reveal">
@@ -1588,6 +2099,143 @@
             container.addEventListener('mouseup', () => isDown = false);
             container.addEventListener('mousemove', (e) => { if (!isDown) return; e.preventDefault(); const x = e.pageX - container.offsetLeft; const walk = (x - startX) * 1.2; container.scrollLeft = scrollLeft - walk; });
         }
+
+        // ===== SWIPE DOTS FOR MOBILE =====
+        const track = document.getElementById('projectsTrack');
+        const dots = document.querySelectorAll('.swipe-dot');
+        if (track && dots.length) {
+            track.addEventListener('scroll', () => {
+                const idx = Math.round(track.scrollLeft / track.clientWidth);
+                dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+            }, { passive: true });
+        }
+
+        // ===== PROJECT DRAWER DATA (MOCK) =====
+        const projectData = {
+            sewa: {
+                title: 'SEWA — Sepsis Early Warning Agent',
+                overview: 'SEWA is a real-time ICU decision-support system that combines LSTM time-series models and XGBoost classifiers to predict sepsis onset hours before conventional clinical recognition. The system runs continuous screening using SIRS and qSOFA criteria, generating auditable risk alerts for clinical staff.',
+                features: [
+                    'Real-time vital sign ingestion via REST & WebSocket streams',
+                    'LSTM + XGBoost ensemble achieving >89% AUROC on MIMIC-III benchmark',
+                    'SIRS / qSOFA dual screening pipeline with configurable thresholds',
+                    'Auditable alert log with clinician override tracking',
+                    'FastAPI backend with async PostgreSQL (asyncpg)',
+                    'Role-based access for doctors, nurses, and admins',
+                ],
+                stack: ['Python', 'FastAPI', 'PostgreSQL', 'TensorFlow', 'XGBoost', 'Docker', 'WebSockets'],
+                images: [
+                    { src: 'https://placehold.co/800x450/2C6975/ffffff?text=Dashboard+View', full: true },
+                    { src: 'https://placehold.co/400x225/68B2A0/ffffff?text=Risk+Score+Graph', full: false },
+                    { src: 'https://placehold.co/400x225/1F4E5A/ffffff?text=Alert+Panel', full: false },
+                ],
+                links: [{ label: 'GitHub', href: 'https://github.com/RasuriVIGNESH/SEWA' }],
+            },
+            quasar: {
+                title: 'QUASAR — Dev Collaboration Platform',
+                overview: 'Quasar is a full-stack collaboration platform where students and developers can post projects, discover teammates, and coordinate work. An AI recommendation engine matches users based on skill overlap, activity, and interest vectors — going far beyond keyword search.',
+                features: [
+                    'AI-powered team matching using skill embedding cosine similarity',
+                    'Real-time chat with WebSocket rooms per project',
+                    'Kanban-style task board with drag-and-drop assignment',
+                    'JWT + OAuth2 authentication (GitHub login supported)',
+                    'Full-text project search with tag filtering',
+                    'Python microservice recommendation engine (FastAPI)',
+                ],
+                stack: ['Java', 'Spring Boot', 'React', 'PostgreSQL', 'WebSockets', 'Python', 'FastAPI', 'Docker'],
+                images: [
+                    { src: 'https://placehold.co/800x450/2C6975/ffffff?text=Landing+Page', full: true },
+                    { src: 'https://placehold.co/400x225/68B2A0/ffffff?text=Project+Feed', full: false },
+                    { src: 'https://placehold.co/400x225/1F4E5A/ffffff?text=Team+Chat', full: false },
+                    { src: 'https://placehold.co/400x225/2C6975/ffffff?text=Task+Board', full: false },
+                    { src: 'https://placehold.co/400x225/68B2A0/ffffff?text=Match+Results', full: false },
+                ],
+                links: [
+                    { label: 'Live Demo', href: 'https://quasar-8bv.pages.dev/' },
+                    { label: 'GitHub', href: 'https://github.com/RasuriVIGNESH/QUASAR' },
+                ],
+            },
+            mergerank: {
+                title: 'MergeRank — CP Analytics Dashboard',
+                overview: 'MergeRank aggregates competitive programming activity from LeetCode, GitHub, Codeforces and more into a single unified dashboard. The AI layer identifies weak problem areas and suggests targeted practice, while a mentor view lets coaches track multiple students simultaneously.',
+                features: [
+                    'Multi-platform aggregation: LeetCode, Codeforces, GitHub, AtCoder',
+                    'AI-powered weak-area detection with personalised problem recommendations',
+                    'Mentor/student view with comparison analytics',
+                    'Contribution heatmaps and rating history charts',
+                    'MERN stack with Cloudflare Pages deployment',
+                    'Cached API polling to respect rate limits across platforms',
+                ],
+                stack: ['MongoDB', 'Express', 'React', 'Node.js', 'Cloudflare Pages'],
+                images: [
+                    { src: 'https://placehold.co/800x450/2C6975/ffffff?text=Dashboard+Overview', full: true },
+                    { src: 'https://placehold.co/400x225/68B2A0/ffffff?text=Rating+History', full: false },
+                    { src: 'https://placehold.co/400x225/1F4E5A/ffffff?text=Mentor+View', full: false },
+                ],
+                links: [
+                    { label: 'Live Demo', href: 'https://mergerank.pages.dev/' },
+                    { label: 'GitHub', href: 'https://github.com/RasuriVIGNESH/MergeRank' },
+                ],
+            },
+        };
+
+        function openDrawer(key) {
+            const data = projectData[key];
+            if (!data) return;
+            document.getElementById('drawerTitle').textContent = data.title;
+
+            // Build images
+            const galleryHTML = data.images.map(img =>
+                `<img src="${img.src}" alt="" class="${img.full ? 'full-width' : ''}" loading="lazy">`
+            ).join('');
+
+            // Build features
+            const featuresHTML = data.features.map(f => `<li>${f}</li>`).join('');
+
+            // Build tags
+            const tagsHTML = data.stack.map(t => `<span class="drawer-tag">${t}</span>`).join('');
+
+            // Build links
+            const linksHTML = data.links.map(l =>
+                `<a href="${l.href}" target="_blank" class="btn-outline" style="font-size:0.8rem;">${l.label} ↗</a>`
+            ).join('');
+
+            document.getElementById('drawerBody').innerHTML = `
+                <div>
+                    <div class="drawer-section-title">Screenshots</div>
+                    <div class="drawer-gallery">${galleryHTML}</div>
+                </div>
+                <div>
+                    <div class="drawer-section-title">Overview</div>
+                    <p class="drawer-text">${data.overview}</p>
+                </div>
+                <div>
+                    <div class="drawer-section-title">Key Features</div>
+                    <ul class="drawer-feature-list">${featuresHTML}</ul>
+                </div>
+                <div>
+                    <div class="drawer-section-title">Tech Stack</div>
+                    <div class="drawer-tags">${tagsHTML}</div>
+                </div>
+                <div>
+                    <div class="drawer-section-title">Links</div>
+                    <div class="drawer-links">${linksHTML}</div>
+                </div>
+            `;
+
+            document.getElementById('drawerOverlay').classList.add('open');
+            document.getElementById('projDrawer').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDrawer() {
+            document.getElementById('drawerOverlay').classList.remove('open');
+            document.getElementById('projDrawer').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
         // minimal github calendar loader
         function loadGH() {
             GitHubCalendar(".calendar", "RasuriVIGNESH", {
