@@ -1478,21 +1478,54 @@
             border-radius: 9999px;
         }
 
-        /* --- New Styles for Image Overlay Layout --- */
+        /* --- Requirement 3: Project Name (No Box) --- */
+        .overlay-name {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 10;
+            background: none;
+            /* Removed background */
+            padding: 0;
+            /* Removed padding */
+            border: none;
+            /* Removed border */
+            backdrop-filter: none;
+            /* Removed blur */
+        }
+
+        .overlay-name h4 {
+            margin: 0;
+            font-size: 1.6rem !important;
+            font-weight: 900;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            /* Added text shadow for readability against different images */
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5), -1px -1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        /* --- Fix: Image Container & Overlays --- */
         .image-container {
             width: 100%;
             display: flex;
             justify-content: center;
-            /* Centers the image wrapper */
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             position: relative;
         }
 
-        /* Wraps the image tightly so the name stays pinned to the diagram edge */
+        /* This keeps SEWA and the Arrow pinned to the edges of the image itself */
         .image-tight-wrapper {
             position: relative;
             display: inline-block;
+            /* Crucial: wraps only the image width */
+        }
+
+        .hero-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
         .overlay-name {
@@ -1500,96 +1533,75 @@
             top: 10px;
             left: 10px;
             z-index: 10;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 0.2rem 0.8rem;
-            border-radius: 4px;
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .overlay-name h4 {
             margin: 0;
-            font-size: 1.4rem !important;
+            font-size: 1.8rem !important;
             font-weight: 800;
             color: var(--accent);
-            text-decoration: underline;
-            text-underline-offset: 4px;
-            text-decoration-color: var(--accent-light);
+            /* No background or box as requested */
+            text-shadow: 1px 1px 0px #fff, -1px -1px 0px #fff;
         }
 
-        .project-meta-footer {
+        /* Right side arrow hint pinned to image edge */
+        .next-hint {
+            position: absolute;
+            right: -20px;
+            /* Pulls it slightly off the edge of the image */
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            gap: 2.5rem;
-            margin-top: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 20;
+            cursor: pointer;
+        }
+
+        /* --- Fix: Tech Stack (Horizontal Row) --- */
+        .project-meta-footer {
+            display: flex;
+            flex-direction: row;
+            /* Force horizontal */
+            align-items: center;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
             padding-top: 1.5rem;
             border-top: 1px solid var(--border);
+            width: 100%;
         }
 
         .tech-stack-reveal {
             display: flex;
+            flex-direction: row;
+            /* Force horizontal */
             gap: 1.5rem;
         }
 
         .tech-item {
-            position: relative;
             display: flex;
             align-items: center;
         }
 
-        .tech-item i {
-            font-size: 2rem;
-            cursor: help;
-            transition: transform 0.2s;
+        /* --- Fix: Inline Read More --- */
+        .project-summary {
+            display: inline;
         }
 
-        /* Tooltip appearing ABOVE the icon */
-        .tech-label {
-            position: absolute;
-            bottom: 140%;
-            left: 50%;
-            transform: translateX(-50%) translateY(5px);
-            background: #111;
-            color: #fff;
-            padding: 0.5rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-family: var(--mono);
+        .read-more-inline {
+            display: inline-flex;
+            align-items: center;
+            color: var(--accent);
+            font-weight: 700;
+            cursor: pointer;
+            margin-left: 5px;
             white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.2s ease;
-            pointer-events: none;
-            z-index: 100;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .tech-item:hover .tech-label {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .tech-item:hover i {
-            transform: scale(1.15);
-        }
-
-        @media (max-width: 768px) {
-            .project-meta-footer {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            .overlay-name {
-                top: 5px;
-                left: 5px;
-            }
-
-            .overlay-name h4 {
-                font-size: 1.1rem !important;
-            }
         }
 
         /* Gallery grid inside drawer */
@@ -1839,9 +1851,11 @@
         <div class="projects-track" id="projectsTrack">
             <!-- SEWA PROJECT SLIDE -->
             <div class="project-slide">
-                <!-- Image Section with Name Overlay -->
+                <!-- Image Section with Name Overlay and Next Arrow -->
                 <div class="image-container">
                     <img src="./project-Photos/SEWA/icu_system_design2.png" alt="SEWA" class="hero-img">
+
+                    <!-- Project name without the white box -->
                     <div class="overlay-name">
                         <h4>SEWA</h4>
                     </div>
@@ -1849,39 +1863,45 @@
 
                 <!-- Info Section -->
                 <div class="project-info">
+                    <!-- Combined Summary and Read More -->
                     <p class="project-summary">
-                        Sepsis Early Warning Agent — real-time ICU decision-support using LSTM +
-                        XGBoost risk models with SIRS/qSOFA screening and auditable alerts. Developed to assist
-                        healthcare professionals in early detection and intervention for critical patient conditions.
+                        I built SEWA [sepsis early warning agent], a real-time ICU monitoring system that catches early
+                        sepsis and pushes alerts to doctors before the window for intervention closes. Patient vitals
+                        stream from bedside monitors through a HAPI FHIR server into a Spring Boot backend, which calls
+                        a FastAPI ML service and broadcasts results over WebSocket to a React dashboard. Each alert
+                        comes
+                        with SHAP-based explanations so doctors can see exactly which vitals or lab values drove the
+                        prediction.
+                        <span class="read-more-inline" onclick="openDrawer('sewa')">
+                            Read more
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 8h10M9 4l4 4-4 4" />
+                            </svg>
+                        </span>
                     </p>
 
-                    <!-- New Meta Footer: Tech + Github -->
+                    <!-- Meta Footer -->
                     <div class="project-meta-footer">
                         <div class="tech-stack-reveal">
-                            <!-- Spring Boot -->
                             <div class="tech-item">
                                 <i class="devicon-spring-original colored"></i>
-                                <span class="tech-label">Spring Boot (Core Backend)</span>
+                                <span class="tech-label">Spring Boot</span>
                             </div>
-                            <!-- React -->
                             <div class="tech-item">
                                 <i class="devicon-react-original colored"></i>
-                                <span class="tech-label">React (Client Dashboard)</span>
+                                <span class="tech-label">React</span>
                             </div>
-                            <!-- Python -->
                             <div class="tech-item">
                                 <i class="devicon-python-plain colored"></i>
-                                <span class="tech-label">Python (ML Sepsis Detection)</span>
+                                <span class="tech-label">Python</span>
                             </div>
-                            <!-- Postgres -->
                             <div class="tech-item">
                                 <i class="devicon-postgresql-plain colored"></i>
-                                <span class="tech-label">PostgreSQL (Database)</span>
+                                <span class="tech-label">PostgreSQL</span>
                             </div>
-                            <!-- FHIR -->
                             <div class="tech-item">
                                 <i class='bx bx-pulse' style="color: #d12d2d; font-size: 2rem;"></i>
-                                <span class="tech-label">FHIR Server (ICU Data Link)</span>
+                                <span class="tech-label">FHIR Server</span>
                             </div>
                         </div>
 
@@ -1891,14 +1911,6 @@
                             </a>
                         </div>
                     </div>
-
-                    <button class="read-more-btn" onclick="openDrawer('sewa')"
-                        style="margin-top: 1rem; align-self: center;">
-                        Read more
-                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 8h10M9 4l4 4-4 4" />
-                        </svg>
-                    </button>
                 </div>
             </div>
 
@@ -1940,7 +1952,7 @@
 
             <!-- MergeRank -->
             <div class="project-slide">
-                <img src="./project-Photos/MergeRank/landingPage.png" alt="MergeRank" class="hero-img">
+                <img src="./project-Photos/MergeRank/SystemDesign.png" alt="MergeRank" class="hero-img">
                 <div class="project-info">
                     <div class="project-header"
                         style="display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
