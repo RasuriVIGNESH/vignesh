@@ -220,6 +220,34 @@
             flex-wrap: wrap;
         }
 
+        .hero-social {
+            display: flex;
+            gap: 0.85rem;
+            margin-top: 1.25rem;
+        }
+
+        .hero-social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(44, 105, 117, 0.08);
+            transform: translateY(-3px);
+        }
+
         .btn {
             padding: 0.8rem 1.8rem;
             border-radius: 12px;
@@ -300,6 +328,56 @@
             letter-spacing: -0.02em;
         }
 
+        /* ===== ABOUT SECTION ===== */
+        #about {
+            padding-top: 5rem;
+            padding-bottom: 3rem;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 3rem;
+            align-items: center;
+            max-height: calc(100vh - 10rem);
+        }
+
+        .about-container > div:first-child {
+            grid-column: 1;
+        }
+
+        .about-container .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.65;
+        }
+
+        .about-img {
+            grid-column: 2;
+            width: 100%;
+            max-width: 360px;
+            max-height: 50vh;
+            object-fit: contain;
+            justify-self: center;
+        }
+
+        @media (max-width: 900px) {
+            .about-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                max-height: none;
+            }
+            .about-container > div:first-child,
+            .about-img {
+                grid-column: 1;
+            }
+            .about-img {
+                order: -1;
+                max-width: 240px;
+                max-height: 220px;
+            }
+        }
+
         /* ===== EXPERIENCE SECTION ===== */
         .timeline {
             position: relative;
@@ -366,7 +444,7 @@
             height: 100vh;
             min-height: 100vh;
             padding: 6rem 2rem 2rem;
-            overflow: hidden;
+            overflow: visible;
         }
 
         #skills .section-content-wrapper {
@@ -436,6 +514,60 @@
         }
 
         .skill-item i { font-size: 1.15rem; }
+
+        /* ===== SKILL HOVER TOOLTIP ===== */
+        .skill-item {
+            position: relative;
+        }
+
+        .skill-item[data-tip]::after {
+            content: attr(data-tip);
+            position: absolute;
+            left: 50%;
+            bottom: calc(100% + 12px);
+            transform: translate(-50%, 6px) scale(0.96);
+            width: 210px;
+            max-width: 60vw;
+            background: var(--text);
+            color: var(--bg);
+            font-family: var(--sans);
+            font-weight: 500;
+            font-size: 0.78rem;
+            line-height: 1.45;
+            white-space: normal;
+            text-align: left;
+            padding: 0.7rem 0.9rem;
+            border-radius: 10px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 60;
+        }
+
+        .skill-item[data-tip]::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: calc(100% + 5px);
+            transform: translate(-50%, 6px);
+            border: 6px solid transparent;
+            border-top-color: var(--text);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.22s ease, transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 60;
+        }
+
+        .skill-item[data-tip]:hover::after,
+        .skill-item[data-tip]:hover::before {
+            opacity: 1;
+            transform: translate(-50%, 0) scale(1);
+        }
+
+        .skill-item[data-tip]:hover::before {
+            transform: translate(-50%, 0);
+        }
         /* ===== PROJECTS SECTION - HORIZONTAL SCROLL ===== */
         #projects {
             position: relative;
@@ -520,6 +652,27 @@
             height: 220px;
             object-fit: cover;
             background: #eef5f3;
+        }
+
+        .project-media {
+            width: 100%;
+            height: 230px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            padding: 1.25rem;
+        }
+
+        .project-media img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
         }
 
         .project-logo {
@@ -668,6 +821,7 @@
             .hero-left { order: 1; }
             .hero-right { order: 2; display: flex; justify-content: center; }
             .hero-buttons { justify-content: center; }
+            .hero-social { justify-content: center; }
             .hero-desc { margin-left: auto; margin-right: auto; }
             .skills-container { grid-template-columns: repeat(2, 1fr); }
         }
@@ -757,6 +911,18 @@
                     <a href="#projects" class="btn btn-primary">View Projects</a>
                     <a href="./Documents/VigneshResume.pdf" target="_blank" class="btn btn-outline"><i class='bx bx-file'></i> Resume</a>
                 </div>
+                <div class="hero-social">
+                    <a href="https://github.com/RasuriVIGNESH/" target="_blank" class="hero-social-link" aria-label="GitHub Profile">
+                        <i class='bx bxl-github'></i>
+                    </a>
+                    <a href="https://leetcode.com/u/RASURI_VIGNESH/" target="_blank" class="hero-social-link" aria-label="LeetCode Profile">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.5 3.5 8 10l-1.2 1.2a3.4 3.4 0 0 0 0 4.8l3.6 3.6a3.4 3.4 0 0 0 4.8 0l1.6-1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9.5 13.5h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                            <path d="M15 17.2 17.8 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
             <div class="hero-right reveal">
                 <div class="terminal-card">
@@ -783,14 +949,17 @@
     <!-- ABOUT SECTION -->
     <section id="about">
         <div class="section-content-wrapper">
-            <div class="reveal">
-                <span class="section-label">Background</span>
-                <h2 class="section-title">About Me</h2>
-                <div style="max-width: 800px; line-height: 1.8; color: var(--muted); font-size: 1.1rem;">
-                    <p style="margin-bottom: 1.5rem;">Hey! I'm a <span style="color: var(--text); font-weight: 600;">Full Stack Java Developer</span> based in India, currently pursuing my B.Tech in Computer Science Engineering at <span style="color: var(--text); font-weight: 600;">Woxsen University</span>.</p>
-                    <p style="margin-bottom: 1.5rem;">I specialize in building scalable backend systems and responsive user interfaces. My toolkit includes Spring Boot, React, and various cloud technologies. I'm passionate about solving complex problems through efficient code and robust system design.</p>
-                    <p>When I'm not coding, you'll find me exploring new tech trends, practicing competitive programming on LeetCode, or working on personal projects that push my boundaries.</p>
+            <div class="reveal about-container">
+                <div>
+                    <span class="section-label">Background</span>
+                    <h2 class="section-title" style="margin-bottom: 1.5rem;">About Me</h2>
+                    <div class="about-text" style="color: var(--muted);">
+                        <p>Hey! I'm a <span style="color: var(--text); font-weight: 600;">Full Stack Java Developer</span> based in India, currently pursuing my B.Tech in Computer Science Engineering at <span style="color: var(--text); font-weight: 600;">Woxsen University</span>.</p>
+                        <p>I specialize in building scalable backend systems and responsive user interfaces. My toolkit includes Spring Boot, React, and various cloud technologies. I'm passionate about solving complex problems through efficient code and robust system design.</p>
+                        <p>When I'm not coding, you'll find me exploring new tech trends, practicing competitive programming on LeetCode, or working on personal projects that push my boundaries.</p>
+                    </div>
                 </div>
+                <img class="about-img" id="aboutSvg" data-src="project-Photos\coder.svg" alt="Coding illustration">
             </div>
         </div>
     </section>
@@ -821,77 +990,117 @@
 
     <!-- SKILLS SECTION -->
     <section id="skills">
-        <div class="section-content-wrapper">
-            <div class="reveal">
-                <span class="section-label">Tech Arsenal</span>
-                <h2 class="section-title">Skills & Expertise</h2>
-                <div class="skills-container">
-                    <div class="skill-group">
-                        <h3><i class='bx bx-code-alt'></i> Languages</h3>
-                        <div class="skill-list">
-                            <div class="skill-item"><i class="devicon-java-plain colored"></i> Java</div>
-                            <div class="skill-item"><i class="devicon-python-plain colored"></i> Python</div>
-                            <div class="skill-item"><i class="devicon-javascript-plain colored"></i> JavaScript</div>
-                            <div class="skill-item"><i class="devicon-html5-plain colored"></i> HTML5</div>
-                            <div class="skill-item"><i class='bx bx-data'></i> SQL</div>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h3><i class='bx bx-server'></i> Backend</h3>
-                        <div class="skill-list">
-                            <div class="skill-item"><i class="devicon-spring-original colored"></i> Spring Boot</div>
-                            <div class="skill-item"><i class="devicon-fastapi-plain colored"></i> FastAPI</div>
-                            <div class="skill-item"><i class="devicon-nodejs-plain colored"></i> Node.js</div>
-                            <div class="skill-item"><i class="devicon-express-original"></i> Express</div>
-                            <div class="skill-item"><i class="devicon-apachekafka-original colored"></i> Kafka</div>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h3><i class='bx bx-palette'></i> Frontend</h3>
-                        <div class="skill-list">
-                            <div class="skill-item"><i class="devicon-react-original colored"></i> React</div>
-                            <div class="skill-item"><i class="devicon-tailwindcss-plain colored"></i> Tailwind CSS</div>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h3><i class='bx bx-data'></i> Database & Cloud</h3>
-                        <div class="skill-list">
-                            <div class="skill-item"><i class="devicon-postgresql-plain colored"></i> PostgreSQL</div>
-                            <div class="skill-item"><i class="devicon-mongodb-plain colored"></i> MongoDB</div>
-                            <div class="skill-item"><i class="devicon-redis-plain colored"></i> Redis</div>
-                            <div class="skill-item"><i class="devicon-docker-plain colored"></i> Docker</div>
-                            <div class="skill-item"><i class="devicon-amazonwebservices-original colored"></i> AWS</div>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h3><i class='bx bx-wrench'></i> Tools & DevOps</h3>
-                        <div class="skill-list">
-                            <div class="skill-item"><i class="devicon-git-plain colored"></i> Git</div>
-                            <div class="skill-item"><i class="devicon-github-original"></i> GitHub</div>
-                            <div class="skill-item"><i class='bx bx-terminal'></i> Postman</div>
-                            <div class="skill-item"><i class='bx bx-pulse'></i> FHIR</div>
-                            <div class="skill-item"><i class="devicon-linux-plain colored"></i> Linux (Ubuntu)</div>
-                            <div class="skill-item"><i class='bx bx-git-merge'></i> CI/CD Pipelines</div>
-                            <div class="skill-item"><i class="devicon-githubactions-plain colored"></i> GitHub Actions</div>
-                            <div class="skill-item"><i class="devicon-swagger-plain colored"></i> Swagger Documentation</div>
-                        </div>
-                    </div>
-                    <div class="skill-group">
-                        <h3><i class='bx bx-brain'></i> Concepts & Practices</h3>
-                        <div class="skill-list">
-                            <div class="skill-item"><i class='bx bx-sitemap'></i> System Design</div>
-                            <div class="skill-item"><i class='bx bx-shape-triangle'></i> OOP</div>
-                            <div class="skill-item"><i class='bx bx-list-ol'></i> DSA</div>
-                            <div class="skill-item"><i class='bx bx-layer'></i> Scalable Architecture</div>
-                            <div class="skill-item"><i class='bx bx-tachometer'></i> Performance Optimization</div>
-                            <div class="skill-item"><i class='bx bx-refresh'></i> Agile</div>
-                            <div class="skill-item"><i class='bx bx-bug'></i> Debugging</div>
-                        </div>
+    <div class="section-content-wrapper">
+        <div class="reveal">
+            <span class="section-label">Tech Arsenal</span>
+            <h2 class="section-title">Skills & Expertise</h2>
+
+            <div class="skills-container">
+
+                <!-- Languages -->
+                <div class="skill-group">
+                    <h3><i class='bx bx-code-alt'></i> Languages</h3>
+                    <div class="skill-list">
+                        <div class="skill-item" data-tip="Primary programming language for building production-ready backend applications. Experienced with Spring Boot, REST APIs, multithreading, collections, and writing clean, maintainable code."><i class="devicon-java-plain colored"></i> Java</div>
+
+                        <div class="skill-item" data-tip="Used Python for automation, scripting, and solving programming problems. Comfortable with core Python concepts and exploring backend development with FastAPI."><i class="devicon-python-plain colored"></i> Python</div>
+
+                        <div class="skill-item" data-tip="Used JavaScript extensively for frontend development with React. Experienced in ES6+, asynchronous programming, API integration, and DOM manipulation."><i class="devicon-javascript-plain colored"></i> JavaScript</div>
+
+                        <div class="skill-item" data-tip="Build responsive, semantic, and accessible web pages using modern HTML5 standards. Experienced creating portfolio websites and integrating with CSS and JavaScript."><i class="devicon-html5-plain colored"></i> HTML5</div>
+
+                        <div class="skill-item" data-tip="Write optimized SQL queries for relational databases. Experienced with joins, indexing, query optimization, and designing efficient database schemas."><i class='bx bx-data'></i> SQL</div>
                     </div>
                 </div>
+
+                <!-- Backend -->
+                <div class="skill-group">
+                    <h3><i class='bx bx-server'></i> Backend</h3>
+                    <div class="skill-list">
+                        <div class="skill-item" data-tip="Core backend framework used in multiple full-stack projects. Built secure REST APIs with JWT authentication, Spring Security, JPA, Hibernate, and production-ready architecture."><i class="devicon-spring-original colored"></i> Spring Boot</div>
+
+                        <div class="skill-item" data-tip="Explored FastAPI for building lightweight and high-performance REST APIs. Familiar with request validation, routing, and automatic API documentation."><i class="devicon-fastapi-plain colored"></i> FastAPI</div>
+
+                        <div class="skill-item" data-tip="Working knowledge of Node.js for backend development and JavaScript-based server applications. Comfortable building REST APIs and integrating external services."><i class="devicon-nodejs-plain colored"></i> Node.js</div>
+
+                        <div class="skill-item" data-tip="Built RESTful APIs using Express.js with middleware, routing, and database integration. Familiar with creating lightweight backend services."><i class="devicon-express-original"></i> Express</div>
+
+                        <div class="skill-item" data-tip="Basic understanding of event-driven architecture using Apache Kafka. Familiar with producers, consumers, and asynchronous message processing."><i class="devicon-apachekafka-original colored"></i> Kafka</div>
+                    </div>
+                </div>
+
+                <!-- Frontend -->
+                <div class="skill-group">
+                    <h3><i class='bx bx-palette'></i> Frontend</h3>
+                    <div class="skill-list">
+                        <div class="skill-item" data-tip="Built responsive frontend applications using React and Vite. Experienced with component-based architecture, hooks, state management, routing, and REST API integration."><i class="devicon-react-original colored"></i> React</div>
+
+                        <div class="skill-item" data-tip="Use Tailwind CSS to build modern, responsive user interfaces efficiently. Comfortable creating reusable components with utility-first styling."><i class="devicon-tailwindcss-plain colored"></i> Tailwind CSS</div>
+                    </div>
+                </div>
+
+                <!-- Database & Cloud -->
+                <div class="skill-group">
+                    <h3><i class='bx bx-data'></i> Database & Cloud</h3>
+                    <div class="skill-list">
+                        <div class="skill-item" data-tip="Primary relational database used in backend projects. Experienced designing schemas, optimizing queries, and integrating PostgreSQL with Spring Data JPA."><i class="devicon-postgresql-plain colored"></i> PostgreSQL</div>
+
+                        <div class="skill-item" data-tip="Familiar with document-oriented database concepts and CRUD operations. Used MongoDB in learning projects and backend experimentation."><i class="devicon-mongodb-plain colored"></i> MongoDB</div>
+
+                        <div class="skill-item" data-tip="Basic knowledge of Redis for caching and improving application performance. Familiar with common caching strategies and key-value storage."><i class="devicon-redis-plain colored"></i> Redis</div>
+
+                        <div class="skill-item" data-tip="Containerized backend applications for consistent development and deployment. Comfortable creating Dockerfiles and managing application containers."><i class="devicon-docker-plain colored"></i> Docker</div>
+
+                        <div class="skill-item" data-tip="Hands-on experience with AWS services including S3 for file storage. Familiar with deploying cloud-based applications and exploring AWS Free Tier services."><i class="devicon-amazonwebservices-original colored"></i> AWS</div>
+                    </div>
+                </div>
+
+                <!-- Tools & DevOps -->
+                <div class="skill-group">
+                    <h3><i class='bx bx-wrench'></i> Tools & DevOps</h3>
+                    <div class="skill-list">
+                        <div class="skill-item" data-tip="Use Git daily for version control, branching, merging, and collaborative development. Comfortable managing feature branches and resolving merge conflicts."><i class="devicon-git-plain colored"></i> Git</div>
+
+                        <div class="skill-item" data-tip="Manage repositories, collaborate using pull requests, and maintain project history on GitHub. Experienced working with GitHub-based development workflows."><i class="devicon-github-original"></i> GitHub</div>
+
+                        <div class="skill-item" data-tip="Use Postman extensively for testing, debugging, and documenting REST APIs. Experienced creating collections, environments, and validating API responses."><i class='bx bx-terminal'></i> Postman</div>
+
+                        <div class="skill-item" data-tip="Worked with FHIR standards for healthcare data exchange. Familiar with FHIR resources and integrating healthcare APIs in backend applications."><i class='bx bx-pulse'></i> FHIR</div>
+
+                        <div class="skill-item" data-tip="Comfortable working in Ubuntu/Linux environments for development and deployment. Experienced using terminal commands, SSH, and server-side workflows."><i class="devicon-linux-plain colored"></i> Linux (Ubuntu)</div>
+
+                        <div class="skill-item" data-tip="Understand CI/CD workflows for automating build, testing, and deployment processes. Familiar with maintaining reliable deployment pipelines."><i class='bx bx-git-merge'></i> CI/CD Pipelines</div>
+
+                        <div class="skill-item" data-tip="Used GitHub Actions to automate builds and deployment workflows. Familiar with workflow configuration and continuous integration practices."><i class="devicon-githubactions-plain colored"></i> GitHub Actions</div>
+
+                        <div class="skill-item" data-tip="Documented and tested REST APIs using Swagger/OpenAPI. Experienced generating interactive API documentation for frontend and backend collaboration."><i class="devicon-swagger-plain colored"></i> Swagger Documentation</div>
+                    </div>
+                </div>
+
+                <!-- Concepts -->
+                <div class="skill-group">
+                    <h3><i class='bx bx-brain'></i> Concepts & Practices</h3>
+                    <div class="skill-list">
+                        <div class="skill-item" data-tip="Understand core system design concepts including RESTful architecture, scalability, database design, and modular application development."><i class='bx bx-sitemap'></i> System Design</div>
+
+                        <div class="skill-item" data-tip="Strong understanding of object-oriented programming principles including encapsulation, inheritance, polymorphism, and abstraction through Java development."><i class='bx bx-shape-triangle'></i> OOP</div>
+
+                        <div class="skill-item" data-tip="Practiced data structures and algorithms through coding challenges and problem-solving. Comfortable with arrays, trees, graphs, recursion, and dynamic programming."><i class='bx bx-list-ol'></i> DSA</div>
+
+                        <div class="skill-item" data-tip="Design backend applications with modular architecture and maintainable code. Focus on clean separation of concerns and scalable REST API development."><i class='bx bx-layer'></i> Scalable Architecture</div>
+
+                        <div class="skill-item" data-tip="Optimized database queries, reduced unnecessary API calls, and improved backend performance. Worked on Hibernate query optimization and GraalVM native image improvements."><i class='bx bx-tachometer'></i> Performance Optimization</div>
+
+                        <div class="skill-item" data-tip="Worked in Agile development environments with iterative delivery, feature implementation, bug fixing, and collaborative development practices."><i class='bx bx-refresh'></i> Agile</div>
+
+                        <div class="skill-item" data-tip="Strong debugging skills across frontend and backend applications. Experienced troubleshooting Spring Boot, React, SQL, deployment, and production issues."><i class='bx bx-bug'></i> Debugging</div>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- PROJECTS SECTION - HORIZONTAL SCROLL -->
     <section id="projects">
@@ -907,7 +1116,9 @@
             <div class="projects-track">
                 <!-- SEWA -->
                 <div class="project-card">
-                    <img src="project-Photos/SEWA/logo.jpg" alt="SEWA logo">
+                    <div class="project-media">
+                        <img src="project-Photos/SEWA/Doctor.svg" alt="SEWA logo">
+                    </div>
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="tag">Spring Boot</span>
@@ -926,7 +1137,9 @@
 
                 <!-- QUASAR -->
                 <div class="project-card">
-                    <img src="project-Photos/quasar/Quasar.png" alt="QUASAR logo">
+                    <div class="project-media">
+                        <img src="project-Photos\quasar\Team working with results.svg" alt="QUASAR logo">
+                    </div>
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="tag">PostgreSQL</span>
@@ -947,7 +1160,9 @@
 
                 <!-- MergeRank -->
                 <div class="project-card">
-                    <img src="project-Photos/MergeRank/leaderboard.png" alt="MergeRank logo">
+                    <div class="project-media">
+                        <img src="project-Photos/MergeRank/leaderboard.png" alt="MergeRank logo">
+                    </div>
                     <div class="project-content">
                         <div class="project-tags">
                             <span class="tag">MERN Stack</span>
@@ -967,11 +1182,11 @@
         </div>
 
         <!-- Scroll Indicator Dots -->
-        <div class="scroll-indicator" id="scrollDots">
+        <!-- <div class="scroll-indicator" id="scrollDots">
             <div class="scroll-dot active" data-index="0"></div>
             <div class="scroll-dot" data-index="1"></div>
             <div class="scroll-dot" data-index="2"></div>
-        </div>
+        </div> -->
     </section>
 
     <!-- CONTACT SECTION -->
@@ -1055,6 +1270,20 @@
         }, { threshold: 0.1 });
 
         reveals.forEach(reveal => observer.observe(reveal));
+
+        // Load the About SVG only the first time the section is seen, so its animation plays once
+        const aboutSvg = document.getElementById('aboutSvg');
+        if (aboutSvg) {
+            const aboutImgObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        aboutSvg.src = aboutSvg.dataset.src;
+                        obs.unobserve(aboutSvg);
+                    }
+                });
+            }, { threshold: 0.3 });
+            aboutImgObserver.observe(aboutSvg);
+        }
 
         // Project Horizontal Scroll Indicator
         const projectsScroll = document.getElementById('projectsScroll');
