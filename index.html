@@ -1157,7 +1157,50 @@
                         </div>
                     </div>
                 </div>
+                <!-- WarrantyHub -->
+                <div class="project-card">
+                    <div class="project-media">
+                        <img
+                            src="project-Photos\warrantyhub\warrantyhub.png"
+                            alt="WarrantyHub project preview placeholder"
+                        >
+                    </div>
 
+                    <div class="project-content">
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Spring Boot</span>
+                            <span class="tag">PostgreSQL</span>
+                        </div>
+
+                        <h3>WarrantyHub</h3>
+                        <p>
+                            A personal warranty management app for tracking devices, warranty
+                            details, maintenance history, and related documents. Get email
+                            alerts for expiring warranties, set device-specific service
+                            reminders, and download device reports with spending information.
+                        </p>
+
+                        <div class="project-footer">
+                            <a
+                                href="https://warrantyhub.pages.dev/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="proj-link"
+                            >
+                                <i class='bx bx-link-external'></i> Live
+                            </a>
+                            <a
+                                href="#"
+                                onclick="openModal('warrantyhub' ); return false;"
+                                class="proj-link"
+                                style="margin-left: auto; color: var(--accent);"
+                            >
+                                Details →
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <!-- MergeRank -->
                 <div class="project-card">
                     <div class="project-media">
@@ -1335,6 +1378,22 @@
                     { label: 'Documentation', href: 'https://app.notion.com/p/Quasar-Documentation-3922067463458092934ce0137eb38b36?source=copy_link' }
                 ]
             },
+            warrantyhub: {
+                title: 'WarrantyHub — Personal Warranty Manager',
+                overview: 'WarrantyHub helps users manage device warranties, maintenance history, and related documents in one place. It also provides warranty-expiry email alerts, device-specific service notifications, and downloadable device reports that include spending information.',
+                features: [
+                    'Track devices and their warranty information',
+                    'Log maintenance history and store related documents',
+                    'Receive email alerts for approaching warranty expirations',
+                    'Set service notifications for individual devices',
+                    'View device information and spending in a downloadable report'
+                ],
+                stack: ['React', 'Spring Boot', 'PostgreSQL'],
+                links: [
+                    { label: 'Live Demo', href: 'https://warrantyhub.pages.dev/' }
+                ]
+            },
+
             mergerank: {
                 title: 'MergeRank — CP Analytics Dashboard',
                 overview: 'MergeRank aggregates competitive programming activity from LeetCode, GitHub, Codeforces and more into a single unified dashboard.',
